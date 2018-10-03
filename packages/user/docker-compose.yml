@@ -11,6 +11,15 @@ services:
       - './:/usr/src/app/packages/user'
     depends_on:
       - db
+      - rabbit
 
   db:
     image: mongo:4.1-xenial
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15672:15672"

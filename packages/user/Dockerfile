@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json lerna.json ./
 COPY packages/base-server ./packages/base-server
+COPY packages/amqp ./packages/amqp
 COPY packages/user ./packages/user
 RUN npm install --loglevel notice --unsafe-perm
 
