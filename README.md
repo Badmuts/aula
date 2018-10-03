@@ -6,7 +6,7 @@ _**Serverless** — A webservice exploring the [CNCF](https://www.cncf.io/) land
 
 * **Containerized**: Every service should be able to run within its own container.
 * **Serverless**: Explore serverless architecture while still be able to manage own server deployments.
-* **Learn**: Explore latest techniques, tools and have fun
+* **Learn**: Explore latest techniques, tools within the Cloud Native industry and have fun doing so.
 
 ## Getting started
 This repo is exploring the monorepo paradigm. To facilitate this [Lerna](https://github.com/lerna/lerna) is used. Getting started should be as simple as running `npm install`:
