@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-server",
+  "name": "@badmuts/serverless-user",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
@@ -10,7 +10,7 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
-    "serverless-http": "^1.6.0"
+    "@badmuts/serverless-base-server": "1.0.0",
+    "mongoose": "^5.3.1"
   }
 }

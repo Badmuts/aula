@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-client",
+  "name": "@badmuts/serverless-app-web",
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "version": "0.1.0",
   "dependencies": {
