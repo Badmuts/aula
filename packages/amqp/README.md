@@ -26,10 +26,7 @@ const AmqpRouter = amqp.Router('user-service')
 
 // Handle user.create commands
 AmqpRouter.command('user.create', (msg, successHandler, errorHandler) => {
-    // create a user and call success
-    success({
-        id: 1,
-        name: 'Gandalf'
-    })
+    // create a user and call successHandler
+    successHandler({ name: 'Gandalf' })
 })
 ```
