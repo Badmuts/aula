@@ -10,8 +10,8 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@badmuts/serverless-base-server": "1.0.0",
-    "@badmuts/serverless-amqp": "1.0.0",
+    "@badmuts/serverless-amqp": "^1.0.0",
+    "@badmuts/serverless-base-server": "^1.0.0",
     "mongoose": "^5.3.1"
   }
 }
