@@ -8,7 +8,9 @@ module.exports = {
     },
 
     findOne(req, res, next) {
-        res.status(204).send()
+        UserService.findOne(req.params.id)
+            .then(user => res.json(user))
+            .catch(next)
     },
 
     find(req, res, next) {

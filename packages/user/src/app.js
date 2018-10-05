@@ -13,8 +13,8 @@ app.get('/healthz', (req, res, next) => {
 })
 
 app.post('/', HttpController.create)
-app.get('/:id', HttpController.findOne)
 app.get('/', HttpController.find)
+app.get('/:id', HttpController.findOne)
 app.put('/:id', HttpController.update)
 app.delete('/:id', HttpController.destroy)
 
