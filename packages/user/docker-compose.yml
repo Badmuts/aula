@@ -8,7 +8,11 @@ services:
     ports:
       - "3000:3000"
     volumes:
+      - '/usr/src/app/packages/user/node_modules'
       - './:/usr/src/app/packages/user'
+    environment:
+      - NODE_ENV=development
+    command: npx nodemon --exec "npm --prefix packages/user start"
     depends_on:
       - db
       - rabbit
