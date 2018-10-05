@@ -1,6 +1,6 @@
 const app = require('@badmuts/serverless-base-server')
 const amqp = require('@badmuts/serverless-amqp')
-const AmqpRouter = amqp.Router('user')
+const AmqpRouter = amqp.Router('user-service')
 
 const HttpController = require('./controllers/HttpController')
 const AmqpController = require('./controllers/AmqpController')
