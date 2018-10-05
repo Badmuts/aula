@@ -6,6 +6,10 @@ module.exports = {
         return UserRepository.create(user)
     },
 
+    find() {
+        return UserRepository.find()
+    },
+
     findOne(id) {
         return UserRepository.findOne(id)
     }

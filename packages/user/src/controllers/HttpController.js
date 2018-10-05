@@ -14,7 +14,9 @@ module.exports = {
     },
 
     find(req, res, next) {
-        res.status(204).send()
+        UserService.find()
+            .then(users => res.json(users))
+            .catch(next)
     },
 
     update(req, res, next) {

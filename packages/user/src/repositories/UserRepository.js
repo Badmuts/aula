@@ -5,6 +5,10 @@ module.exports = {
         return User.create(user)
     },
 
+    find() {
+        return User.find().exec()
+    },
+
     findOne(id) {
         return User.findById(id).exec()
     }

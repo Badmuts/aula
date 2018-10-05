@@ -5,7 +5,7 @@ module.exports = {
     create(msg, success, error) {
         UserService.create(msg.content)
             .then(user => {
-                log('user.create.success')
+                log('user.create.success', `#${user.id}`)
                 return user
             })
             .then(success)
