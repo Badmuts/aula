@@ -13,6 +13,7 @@
   "dependencies": {
     "@badmuts/serverless-amqp": "^1.0.0",
     "@badmuts/serverless-base-server": "^1.0.0",
+    "@badmuts/serverless-crypto": "1.0.0",
     "mongoose": "^5.3.1"
   }
 }

@@ -16,5 +16,3 @@ db.once('open', function() {
 
   app.listen(PORT, () => console.info(`Listening on :${PORT}`))
 });
-
-
