@@ -1,6 +1,6 @@
 {
   "name": "@badmuts/serverless-user",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "src/app.js",
   "scripts": {
@@ -11,9 +11,9 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@badmuts/serverless-amqp": "^1.0.0",
+    "@badmuts/serverless-amqp": "^1.0.2",
     "@badmuts/serverless-base-server": "^1.0.0",
-    "@badmuts/serverless-crypto": "1.0.0",
+    "@badmuts/serverless-crypto": "^1.0.2",
     "mongoose": "^5.3.1"
   }
 }
