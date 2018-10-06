@@ -6,7 +6,7 @@ const crypto = require('@badmuts/serverless-crypto')
 const userSchema = new Schema({
   name: String,
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   lastLogin: Date,
   createdAt: Date,
   updatedAt: Date
