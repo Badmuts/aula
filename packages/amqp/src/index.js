@@ -120,9 +120,9 @@ function Router(serviceName) {
     return {
         command: (command, cb) => {
             const routingKeys = [
-                `*.*.command.${command}`,
-                `*.*.event.${command}.success`,
-                `*.*.event.${command}.failed`
+                `*.*.command.${command}.#`,
+                `*.*.event.${command}.success.#`,
+                `*.*.event.${command}.failed.#`
             ]
 
             const queues = routingKeys.map(key => `${serviceName}.${key}`)
