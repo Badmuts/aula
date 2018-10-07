@@ -25,6 +25,7 @@ app.delete('/users/:id', isAuthenticated, UserHttpController.destroy)
 AmqpRouter.command('user.create', UserAmqpController.create)
 
 app.post('/tokens', TokenHttpController.create)
+app.put('/tokens', TokenHttpController.update)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

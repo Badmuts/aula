@@ -27,5 +27,27 @@ module.exports = {
             )
             .then(tokenPair => res.json(tokenPair))
             .catch(next)
+    },
+
+    /**
+     * Update (refresh) provided tokenpair
+     *
+     * @param {*} req
+     * @param {*} res
+     * @param {*} next
+     */
+    update(req, res, next) {
+        const { accessToken, refreshToken } = req.body
+
+        if (!accessToken || !refreshToken) {
+            return next({
+                status: 400,
+                message: 'Missing access- or refreshtoken'
+            })
+        }
+
+        TokenService.refreshTokenPair({ accessToken, refreshToken })
+            .then(tokenPair => res.json(tokenPair))
+            .catch(next)
     }
 }
