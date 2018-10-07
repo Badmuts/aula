@@ -1,3 +1,4 @@
+const UserService = require('../../services/UserService')
 const TokenService = require('../../services/TokenService')
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
             })
         }
 
-        TokenService.login(email, password)
+        UserService.login(email, password)
             .then(user => user
                 ? TokenService.createTokenPair(user)
                 : Promise.reject({ status: 400, message: 'User not found or wrong password provided'})
