@@ -1,4 +1,4 @@
-const UserService = require('../services/UserService.js')
+const UserService = require('../../services/UserService.js')
 const log = (...args) => console.info(`[${new Date().toISOString()}]`, 'amqp', 'event', ...args)
 
 module.exports = {

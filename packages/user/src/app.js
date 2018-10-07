@@ -1,9 +1,13 @@
 const app = require('@badmuts/serverless-base-server')
 const amqp = require('@badmuts/serverless-amqp')
 const AmqpRouter = amqp.Router('user-service')
+const isAuthenticated = require('express-jwt')({
+    secret: require('./config/jwt').accessToken.publicKey
+})
 
-const HttpController = require('./controllers/HttpController')
-const AmqpController = require('./controllers/AmqpController')
+const UserHttpController = require('./controllers/user/HttpController')
+const UserAmqpController = require('./controllers/user/AmqpController')
+const TokenHttpController = require('./controllers/token/HttpController');
 
 app.get('/healthz', (req, res, next) => {
     res.json({
@@ -12,11 +16,15 @@ app.get('/healthz', (req, res, next) => {
     })
 })
 
-app.post('/', HttpController.create)
-app.get('/', HttpController.find)
-app.get('/:id', HttpController.findOne)
-app.put('/:id', HttpController.update)
-app.delete('/:id', HttpController.destroy)
+app.post('/users', UserHttpController.create)
+app.get('/users', isAuthenticated, UserHttpController.find)
+app.get('/users/:id', isAuthenticated, UserHttpController.findOne)
+app.put('/users/:id', isAuthenticated, UserHttpController.update)
+app.delete('/users/:id', isAuthenticated, UserHttpController.destroy)
+
+AmqpRouter.command('user.create', UserAmqpController.create)
+
+app.post('/tokens', TokenHttpController.create)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -41,7 +49,5 @@ app.use((err, req, res, next) => {
         stack: (process.env.NODE_ENV === 'development') ? err.stack : {},
     });
 });
-
-AmqpRouter.command('user.create', AmqpController.create)
 
 module.exports = app

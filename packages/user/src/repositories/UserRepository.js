@@ -11,5 +11,15 @@ module.exports = {
 
     findOne(id) {
         return User.findById(id).exec()
+    },
+
+    findByEmail(email, withPassword = false) {
+        const query = User.findOne({ email: email })
+
+        if (withPassword) {
+            query.select('+password')
+        }
+
+        return query.exec()
     }
 }

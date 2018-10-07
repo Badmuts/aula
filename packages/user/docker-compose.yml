@@ -10,8 +10,7 @@ services:
     volumes:
       - '/usr/src/app/packages/user/node_modules'
       - './:/usr/src/app/packages/user'
-    environment:
-      - NODE_ENV=development
+    env_file: .env
     command: npx nodemon --exec "npm --prefix packages/user start"
     depends_on:
       - db

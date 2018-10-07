@@ -4,6 +4,8 @@ _**User service** — User microservice for creating, reading, updating and dest
 
 ## Getting started
 ```sh
+# Setup env
+$ cp .env.example .env
 # Build base image
 $ docker-compose build
 # Start developing
