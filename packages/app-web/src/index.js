@@ -8,12 +8,14 @@ import {
     Route
 } from 'react-router-dom';
 import { LoginContainer } from './containers/LoginContainer';
+import { SignupContainer } from './containers/SignupContainer';
 
 const Routes = () => (
     <Router>
         <div>
             <Route exact path="/" component={App} />
             <Route path="/auth/login" component={LoginContainer} />
+            <Route path="/auth/signup" component={SignupContainer} />
         </div>
     </Router>
 )

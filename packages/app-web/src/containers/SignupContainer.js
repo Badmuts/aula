@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoginForm } from '../components/forms/login/LoginForm';
+import { SignupForm } from '../components/forms/signup/SignupForm';
 
 const handleError = res => {
     if (!res.ok) {
@@ -8,17 +8,17 @@ const handleError = res => {
     return res
 }
 
-export class LoginContainer extends React.Component {
+export class SignupContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { isLoading: false, isAuthenticated: false }
     }
 
-    login(loginDetails) {
+    signup(user) {
         this.setState({ isLoading: true })
-        fetch('/api/tokens', {
+        fetch('/api/users', {
             method: 'POST',
-            body: JSON.stringify(loginDetails),
+            body: JSON.stringify(user),
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -50,13 +50,13 @@ export class LoginContainer extends React.Component {
         }
 
         if (isAuthenticated) {
-            return <p>Login successful</p>
+            return <p>Signup successful</p>
         }
 
         if (isLoading) {
             return <p>Loading...</p>
         }
 
-        return <LoginForm onSubmit={loginDetails => this.login(loginDetails)} />
+        return <SignupForm onSubmit={user => this.signup(user)} />
     }
 }
