@@ -1,0 +1,40 @@
+version: '3'
+services:
+  api-gateway:
+    image: traefik
+    ports:
+      - "80:80"
+    volumes:
+      - ./api-gateway.toml:/etc/traefik/traefik.toml
+
+  app-web:
+    build:
+      context: .
+      dockerfile: packages/app-web/Dockerfile-dev
+    image: badmuts/serverless-app-web
+    volumes:
+      - '/usr/src/app/packages/app-web/node_modules'
+      - './packages/app-web:/usr/src/app/packages/app-web'
+
+  user-service:
+    build:
+      context: .
+      dockerfile: packages/user/Dockerfile
+    image: badmuts/serverless-user:${TAG:-latest}
+    volumes:
+      - '/usr/src/app/packages/user/node_modules'
+      - './packages/user:/usr/src/app/packages/user'
+    env_file: packages/user/.env
+    command: npx nodemon --exec "npm --prefix packages/user start"
+    depends_on:
+      - user-db
+      - rabbit
+
+  user-db:
+    image: mongo:4.1-xenial
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root

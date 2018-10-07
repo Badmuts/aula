@@ -16,7 +16,7 @@ services:
       - db
       - rabbit
 
-  db:
+  user-db:
     image: mongo:4.1-xenial
 
   rabbit:

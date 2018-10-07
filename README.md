@@ -16,5 +16,11 @@ $ npm install
 # Run client
 $ npm run start:client
 # Run server
-$ npm run start:server
+$ npm run start:user
+```
+
+Recommend way is to use the provided docker environment:
+
+```sh
+$ docker-compose up
 ```
