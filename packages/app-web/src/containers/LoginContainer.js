@@ -1,45 +1,20 @@
 import React from 'react';
 import { LoginForm } from '../components/forms/login/LoginForm';
-
-const handleError = res => {
-    if (!res.ok) {
-        throw Error(res.statusText)
-    }
-    return res
-}
+import AuthService from '../services/AuthService';
+import { Redirect, Link } from 'react-router-dom';
 
 export class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isLoading: false, isAuthenticated: false }
+        this.state = { isLoading: false, isAuthenticated: AuthService.isAuthenticated() }
     }
 
     login(loginDetails) {
         this.setState({ isLoading: true })
-        fetch('/api/tokens', {
-            method: 'POST',
-            body: JSON.stringify(loginDetails),
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(handleError)
-            .then(res => res.json())
-            .then(() => this.isAuthenticated())
-            .catch(() => this.showError())
-            .finally(() => this.stopLoading())
-    }
-
-    isAuthenticated() {
-        this.setState({isAuthenticated: true})
-    }
-
-    stopLoading() {
-        this.setState({isLoading: false})
-    }
-
-    showError() {
-        this.setState({ error: 'Something went wrong, please try again' })
+        AuthService.login(loginDetails)
+            .then(() => this.setState({isAuthenticated: true}))
+            .catch(() => this.setState({ error: 'Something went wrong, please try again' }))
+            .finally(() => this.setState({isLoading: false}))
     }
 
     render() {
@@ -50,13 +25,18 @@ export class LoginContainer extends React.Component {
         }
 
         if (isAuthenticated) {
-            return <p>Login successful</p>
+            return <Redirect to="/" />
         }
 
         if (isLoading) {
             return <p>Loading...</p>
         }
 
-        return <LoginForm onSubmit={loginDetails => this.login(loginDetails)} />
+        return (
+            <div>
+                <LoginForm onSubmit={loginDetails => this.login(loginDetails)} />
+                <Link to="/auth/signup">Signup</Link>
+            </div>
+        )
     }
 }

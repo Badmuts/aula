@@ -9,11 +9,12 @@ import {
 } from 'react-router-dom';
 import { LoginContainer } from './containers/LoginContainer';
 import { SignupContainer } from './containers/SignupContainer';
+import PrivateRoute from './components/PrivateRoute';
 
 const Routes = () => (
     <Router>
         <div>
-            <Route exact path="/" component={App} />
+            <PrivateRoute exact path="/" component={App} />
             <Route path="/auth/login" component={LoginContainer} />
             <Route path="/auth/signup" component={SignupContainer} />
         </div>
