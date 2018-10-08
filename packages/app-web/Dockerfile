@@ -1,4 +1,5 @@
 FROM node:8.12-alpine AS builder
+ENV NODE_ENV=production
 WORKDIR /app
 COPY package*.json lerna.json ./
 COPY packages/app-web ./packages/app-web
