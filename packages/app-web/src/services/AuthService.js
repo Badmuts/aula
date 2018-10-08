@@ -3,7 +3,6 @@ export class AuthService {
         this.tokenPair = {};
         this.tokenPair.accessToken = localStorage.getItem('app.accessToken')
         this.tokenPair.refreshToken = localStorage.getItem('app.refreshToken')
-        console.log('isAuthenticated', this.isAuthenticated())
     }
 
     login({ email, password }) {
@@ -51,7 +50,6 @@ export class AuthService {
                 return true
             }
         } catch (err) {
-            console.error(err)
             return false;
         }
         return false
