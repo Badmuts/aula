@@ -1,4 +1,5 @@
 const amqp = require('amqplib')
+const uuid = require('uuid/v4')
 const config = {}
 const self = this
 
@@ -143,10 +144,59 @@ function Router(serviceName) {
                 .catch(err => console.error(err))
         },
 
+        rpc: (rpcName, cb) => {
+            const queue = `rpc.${rpcName}`
+
+            const replyRPC = (ch, msg) => (reply) => {
+                const replyMsg = JSON.stringify(reply)
+                ch.sendToQueue(msg.properties.replyTo, Buffer.from(replyMsg), {correlationId: msg.properties.correlationId})
+                ch.ack(msg);
+            }
+
+            createChannel()
+                .then(ch => Promise.all([
+                    ch,
+                    ch.assertQueue(queue, { durable: false }),
+                    ch.prefetch(1)
+                ]))
+                .then(([ch]) => {
+                    ch.consume(queue, msg => {
+                        cb(msg, replyRPC(ch, msg))
+                    })
+                })
+        },
+
         event: (event, cb) => {
 
         },
     }
+}
+
+/**
+ *
+ */
+function rpc(rpcName, payload) {
+    const queue = `rpc.${rpcName}`
+    return new Promise(resolve => {
+        createChannel()
+            .then(ch => Promise.all([
+                ch,
+                ch.assertQueue('', {exclusive: true})
+            ]))
+            .then(([ch, q]) => {
+                const correlationId = uuid()
+
+                ch.consume(q.queue, function(msg) {
+                    if (msg.properties.correlationId === correlationId) {
+                        resolve(JSON.parse(msg.content.toString()))
+                    }
+                }, {noAck: true});
+
+                ch.sendToQueue(queue,
+                    Buffer.from(JSON.stringify(payload)),
+                    { correlationId: correlationId, replyTo: q.queue });
+            })
+    })
 }
 
 module.exports = {
@@ -154,5 +204,6 @@ module.exports = {
     Queue,
     consume,
     publish,
-    Router
+    Router,
+    rpc
 }
