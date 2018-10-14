@@ -28,3 +28,7 @@ button {
         sans-serif;
     font-size: 1em;
 }
+
+input {
+    box-sizing: border-box;
+}
