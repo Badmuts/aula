@@ -1,8 +1,11 @@
+.navbar-wrapper {
+    border-bottom: 1px solid #E5E6E7;
+}
+
 .navbar {
     text-align: left;
     width: 1370px;
     margin: 0 auto;
-    border-bottom: 1px solid #E5E6E7;
     height: 72px;
     display: grid;
     grid-template-columns: repeat(12, [col-start] 1fr);
@@ -29,6 +32,7 @@
 
 .search input:focus {
     border-color: #9BA1A8;
+    outline: none;
 }
 
 .search-icon {
@@ -49,4 +53,52 @@
 .nav-options {
     text-align: right;
     grid-column-end: -1;
+}
+
+.search-box {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 10px 14px;
+    margin-top: 10px;
+    border: 1px solid #E5E6E7;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, .1);
+    animation-name: fadeInUp;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+}
+
+.search-box.is-open {
+    display: block;
+}
+
+.search-item {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.search-item:hover {
+    background-color: #F9F9F9;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 5%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.search-box hr {
+    opacity: .2;
 }
