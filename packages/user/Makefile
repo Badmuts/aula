@@ -20,4 +20,11 @@ build-release:
 push-release:
 	@echo "pushing release..."
 	@echo "[i] tag: $(TAG)"
-    # @TAG=$(TAG) docker-compose -f docker-compose.yml push
+    @TAG=$(TAG) docker-compose -f docker-compose.yml push
+
+create-es-keypair:
+	@openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem
+	@openssl ec -in ec_private.pem -pubout -out ec_public.pem
+	base64 ec_private.pem
+	base64 ec_public.pem
+	rm ec_private.pem ec_public.pem

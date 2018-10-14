@@ -1,4 +1,7 @@
 import React from 'react'
+import './LoginForm.css'
+import { Link } from 'react-router-dom'
+import logo from './logo.svg'
 
 export class LoginForm extends React.Component {
     constructor(props) {
@@ -18,16 +21,20 @@ export class LoginForm extends React.Component {
 
     render() {
         return (
-            <form action="#" onSubmit={e => this.onSubmit(e)}>
-                <h1>Login</h1>
-                <label htmlFor="email">email</label>
-                <input type="email" id="email" name="email" placeholder="janedoe@example.com" required tabIndex="1" onChange={e => this.onChange(e)} />
+            <div>
+                <form className="LoginForm" action="#" onSubmit={e => this.onSubmit(e)}>
+                    <img src={logo} alt="Logo"/>
+                    <hr />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="janedoe@example.com" required tabIndex="1" onChange={e => this.onChange(e)} />
 
-                <label htmlFor="password">password</label>
-                <input type="password" id="password" name="password" tabIndex="2" required onChange={e => this.onChange(e)} />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" tabIndex="2" required onChange={e => this.onChange(e)} />
 
-                <button type="submit" tabIndex="3">Login</button>
-            </form>
+                    <button type="submit" tabIndex="3">Login</button>
+                </form>
+                <Link className="signup-link" to="/auth/signup">Signup</Link>
+            </div>
         )
     }
 }

@@ -33,11 +33,6 @@ export class SignupContainer extends React.Component {
             return <p>Loading...</p>
         }
 
-        return (
-            <div>
-                <SignupForm onSubmit={user => this.signup(user)} />
-                <Link to="/auth/login">Login</Link>
-            </div>
-        )
+        return <SignupForm onSubmit={user => this.signup(user)} />
     }
 }
