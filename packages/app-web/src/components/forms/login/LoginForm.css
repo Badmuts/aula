@@ -1,0 +1,69 @@
+.LoginForm {
+    width: 333px;
+    background: #fff;
+    padding: 29px 20px;
+    border: 1px solid hsl(210, 1%, 91%);
+    border-radius: 6px;
+    box-shadow: 0 4px 18px 0 hsla(0, 0%, 0%, 0.1);
+    margin: 40px auto;
+    margin-bottom: 15px;
+}
+
+.LoginForm img {
+    display: block;
+    height: 175%;
+    margin: 0 auto;
+}
+
+.LoginForm hr {
+    border-color: hsl(210, 1%, 91%);
+    margin: 12px 0;
+    opacity: 0.3;
+}
+
+.LoginForm label,
+.LoginForm input {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+.LoginForm label {
+    color: #9BA1A7;
+    margin-bottom: 5px;
+}
+
+.LoginForm input {
+    margin-bottom: 10px;
+    padding: 6px 13px;
+    background: #F9F9F9;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: #0E1610;
+    box-sizing: border-box;
+}
+
+.LoginForm input:focus {
+    border-color: #9BA1A8;
+}
+
+.LoginForm button {
+    width: 100%;
+    margin: 0;
+    padding: 9px 13px;
+    background-color: hsl(136, 46%, 86%);
+    border: 0;
+    border-radius: 6px;
+    color: hsl(136, 46%, 36%);
+}
+
+.LoginForm button:hover {
+    background-color: hsl(136, 36%, 82%);
+}
+
+.signup-link {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
