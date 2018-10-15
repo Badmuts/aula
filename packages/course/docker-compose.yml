@@ -1,0 +1,28 @@
+version: '3'
+services:
+  course-service:
+    build:
+      context: ../../
+      dockerfile: packages/course/Dockerfile
+    image: badmuts/serverless-course:${TAG:-latest}
+    ports:
+      - "3000:3000"
+    volumes:
+      - '/usr/src/app/packages/course/node_modules'
+      - './:/usr/src/app/packages/course'
+    env_file: .env
+    command: npx nodemon --exec "npm --prefix packages/course start"
+    depends_on:
+      - db
+      - rabbit
+
+  course-db:
+    image: mongo:4.1-xenial
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15672:15672"

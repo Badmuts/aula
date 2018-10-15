@@ -1,0 +1,12 @@
+const elasticsearch = require('elasticsearch')
+const client = new elasticsearch.Client({
+    host: require('./../config/elastic').host,
+    log: 'trace'
+})
+
+module.exports = {
+    start: () => {
+        // start all indexers
+        require('./CourseIndexer')(client)
+    }
+}

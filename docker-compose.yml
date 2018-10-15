@@ -33,8 +33,44 @@ services:
   user-db:
     image: mongo:4.1-xenial
 
+  course-service:
+    build:
+      context: .
+      dockerfile: packages/course/Dockerfile
+    image: badmuts/serverless-course:${TAG:-latest}
+    volumes:
+      - '/usr/src/app/packages/course/node_modules'
+      - './packages/course:/usr/src/app/packages/course'
+    env_file: packages/course/.env
+    command: npx nodemon --exec "npm --prefix packages/course start"
+    depends_on:
+      - course-db
+      - rabbit
+
+  course-db:
+    image: mongo:4.1-xenial
+
+  search-service:
+    build:
+      context: .
+      dockerfile: packages/search/Dockerfile
+    image: badmuts/serverless-search:${TAG:-latest}
+    volumes:
+      - '/usr/src/app/packages/search/node_modules'
+      - './packages/search:/usr/src/app/packages/search'
+    env_file: packages/search/.env
+    command: npx nodemon --exec "npm --prefix packages/search start"
+    depends_on:
+      - elastic
+      - rabbit
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+
   rabbit:
     image: rabbitmq:management-alpine
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15672:15672"

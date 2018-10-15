@@ -1,5 +1,4 @@
 import React from 'react';
-import App from '../components/App/App';
 import NavbarContainer from '../containers/NavbarContainer';
 import Sidebar from '../components/Sidebar';
 import Hero from '../components/Hero';

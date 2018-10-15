@@ -1,0 +1,28 @@
+version: '3'
+services:
+  search-service:
+    build:
+      context: ../../
+      dockerfile: packages/search/Dockerfile
+    image: badmuts/serverless-search:${TAG:-latest}
+    ports:
+      - "3000:3000"
+    volumes:
+      - '/usr/src/app/packages/search/node_modules'
+      - './:/usr/src/app/packages/search'
+    env_file: .env
+    command: npx nodemon --exec "npm --prefix packages/search start"
+    depends_on:
+      - elastic
+      - rabbit
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15672:15672"

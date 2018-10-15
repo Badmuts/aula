@@ -13,6 +13,12 @@ address = ":8080"
     [backends.user-service]
       [backends.user-service.servers.server1]
         url = "http://user-service:3000"
+    [backends.course-service]
+      [backends.course-service.servers.server1]
+        url = "http://course-service:3000"
+    [backends.search-service]
+      [backends.search-service.servers.server1]
+        url = "http://search-service:3000"
     [backend.app-web]
       [backends.app-web.servers.server1]
         url = "http://app-web:3000"
@@ -23,6 +29,16 @@ address = ":8080"
       entrypoints = ["http"]
     [frontends.user-service.routes.user]
       rule = "Path: /api/users,/api/users/{id},/api/tokens;ReplacePathRegex: ^/api/(.*) /$1"
+    [frontends.course-service]
+      backend = "course-service"
+      entrypoints = ["http"]
+    [frontends.course-service.routes.user]
+      rule = "Path: /api/courses,/api/courses/{id};ReplacePathRegex: ^/api/(.*) /$1"
+    [frontends.search-service]
+      backend = "search-service"
+      entrypoints = ["http"]
+    [frontends.search-service.routes.user]
+      rule = "Path: /api/search;ReplacePathRegex: ^/api/(.*) /$1"
     [frontends.app-web]
       backend = "app-web"
       entrypoints = ["http"]
