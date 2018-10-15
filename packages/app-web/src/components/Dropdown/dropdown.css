@@ -1,0 +1,57 @@
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 10px 14px;
+    margin-top: 10px;
+    border: 1px solid #E5E6E7;
+    border-radius: 6px;
+    width: 100%;
+    justify-self: end;
+    min-width: 240px;
+    text-align: left;
+    right: 0;
+    box-sizing: border-box;
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, .1);
+    animation-name: fadeInUp;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #0E1610;
+    padding: 7px 15px;
+    display: block;
+    border-radius: 6px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #F9F9F9;
+}
+
+.dropdown-menu.is-open {
+    display: block;
+}
+
+.dropdown {
+    position: relative;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 5%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}

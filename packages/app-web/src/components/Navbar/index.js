@@ -4,6 +4,7 @@ import iconSearch from './icon-search.svg'
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import Loader from '../Loader';
+import Dropdown from '../Dropdown';
 
 export default class Navbar extends React.Component {
     constructor(props) {
@@ -51,7 +52,11 @@ export default class Navbar extends React.Component {
                     </div>
 
                     <div className="nav-options">
-                        <img src="//gravatar.com/avatar/8aa5cf1c09d31cf3ca0d31ae5a179d89" className="avatar" />
+                        <Dropdown items={[
+                            <a href="#" onClick={() => this.props.onLogout()}>Logout</a>]
+                        }>
+                            <img src="//gravatar.com/avatar/8aa5cf1c09d31cf3ca0d31ae5a179d89" className="avatar" />
+                        </Dropdown>
                     </div>
                 </nav>
             </div>
