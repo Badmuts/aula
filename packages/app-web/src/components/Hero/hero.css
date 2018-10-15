@@ -1,0 +1,19 @@
+.hero {
+    min-height: 325px;
+    grid-column: span 8;
+    background-color: rgba(232, 243, 236, 1);
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.hero h1 {
+    margin: 0;
+    line-height: 1.125em;
+}
+
+.hero p {
+    line-height: 1.5em;
+}

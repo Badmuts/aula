@@ -1,4 +1,5 @@
 import React from 'react'
+import './dropdown.css'
 
 export default class Dropdown extends React.Component {
     constructor(props) {
@@ -6,14 +7,15 @@ export default class Dropdown extends React.Component {
         this.state = {
             dropdownIsOpen: false
         }
+        this.onClick = this.onClick.bind(this)
     }
 
     componentWillMount() {
-        document.addEventListener('mousedown', (e) => this.onClick(e), false)
+        document.addEventListener('mousedown', this.onClick, false)
     }
 
     componentWillUnmount() {
-        document.removeEventListener('mousedown', (e) => this.onClick(e), false)
+        document.removeEventListener('mousedown', this.onClick, false)
     }
 
     onClick(e) {
@@ -25,7 +27,7 @@ export default class Dropdown extends React.Component {
 
     render() {
         return (
-            <div className="dropdown" onClick={(e) => this.onClick(e)} ref={ref => this.node = ref}>
+            <div className="dropdown" onClick={this.onClick} ref={ref => this.node = ref}>
                 {this.props.children}
                 <div className={["dropdown-menu", this.state.dropdownIsOpen && "is-open"].join(" ")}>
                     <ul>

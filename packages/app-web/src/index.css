@@ -32,3 +32,13 @@ button {
 input {
     box-sizing: border-box;
 }
+
+.container {
+    width: 1370px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    grid-template-rows: 1;
+    grid-gap: 20px;
+}

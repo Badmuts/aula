@@ -55,7 +55,7 @@ export default class Navbar extends React.Component {
                         <Dropdown items={[
                             <a href="#" onClick={() => this.props.onLogout()}>Logout</a>]
                         }>
-                            <img src="//gravatar.com/avatar/8aa5cf1c09d31cf3ca0d31ae5a179d89" className="avatar" />
+                            <img src={this.props.user.avatarUrl} className="avatar" />
                         </Dropdown>
                     </div>
                 </nav>
