@@ -24,3 +24,12 @@ Recommend way is to use the provided docker environment:
 ```sh
 $ docker-compose up
 ```
+
+## Packages
+* 💬 [amqp](packages/amqp/README.md)
+* 🦄 [app-web](packages/app-web/README.md)
+* 🌍 [base-server](packages/base-server/README.md)
+* 📓 [course](packages/course/README.md)
+* 🔐 [crypto](packages/crypto/README.md)
+* 🕵️‍♂️ [search](packages/search/README.md)
+* 👨‍🎨 [user](packages/user/README.md)
