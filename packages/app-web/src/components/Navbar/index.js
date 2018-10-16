@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 import Loader from '../Loader';
 import Dropdown from '../Dropdown';
 
-export default class Navbar extends React.Component {
+export class Navbar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             searchBoxIsOpen: false,
-            isLoading: false
+            isLoading: false,
+            query: ''
         }
     }
 
@@ -28,22 +29,16 @@ export default class Navbar extends React.Component {
                     <div className="search">
                         <img src={iconSearch} className="search-icon" />
                         <input type="text" placeholder="Zoeken..." tabIndex="1"
-                            onFocus={() => this.setState({ searchBoxIsOpen: true })}
+                            onFocus={() => this.state.query.length && this.setState({ searchBoxIsOpen: true })}
                             onBlur={() => this.setState({ searchBoxIsOpen: false })}
-                            onChange={(e) => this.setState({ query: e.target.value })}
+                            onChange={(e) => this.setState({ searchBoxIsOpen: true, query: e.target.value }, () => this.props.onSearch(this.state.query))}
                         />
-                        <div className={["search-box", this.state.searchBoxIsOpen && "is-open"].join(' ')}>
+                        <div className={["search-box", (this.state.searchBoxIsOpen && this.state.query.length && this.props.searchResults.length) && "is-open"].join(' ')}>
                             <div className="search-results">
-                                {this.state.isLoading
+                                {this.props.isLoading
                                     ? <Loader />
                                     : (<div>
-                                        <div className="search-item">Hello World!</div>
-                                        <div className="search-item">Hello World!</div>
-                                        <div className="search-item">Hello World!</div>
-                                        <div className="search-item">Hello World!</div>
-                                        <hr />
-                                        <div className="search-item">Hello World!</div>
-                                        <div className="search-item">Hello World!</div>
+                                        {this.props.searchResults.map(item => <div className="search-item" key={item._id} onClick={() => this.props.history.push(`/courses/${item._id}`)}>{item._source.name}</div>)}
                                         </div>
                                     )
                                 }
@@ -63,3 +58,9 @@ export default class Navbar extends React.Component {
         )
     }
 }
+
+Navbar.defaultProps = {
+    searchResults: []
+}
+
+export default Navbar

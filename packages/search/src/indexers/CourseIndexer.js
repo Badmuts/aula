@@ -1,7 +1,7 @@
 const amqp = require('@badmuts/serverless-amqp')
 
 module.exports = (elasticClient) => {
-    console.log('Course indexer started')
+    console.log('Course indexer started...')
     amqp.Queue('search-service.course-indexer.course.created', ['*.*.course.created.#'])
         .then(() => {
             amqp.consume('search-service.course-indexer.course.created', (message) => {

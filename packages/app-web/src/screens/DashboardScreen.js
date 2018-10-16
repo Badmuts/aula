@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarContainer from '../containers/NavbarContainer';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../containers/SidebarContainer';
 import Hero from '../components/Hero';
 import Loader from '../components/Loader';
 
@@ -8,7 +8,7 @@ export default (props) => (
     <div>
         <NavbarContainer {...props} />
         <div className="container">
-            <Sidebar />
+            <Sidebar {...props} />
             <Hero />
             <Loader style={{gridRow: '2', gridColumn: 'span 12'}} />
         </div>

@@ -6,10 +6,7 @@ import './sidebar.css'
 export default (props) => (
     <div className="sidebar">
         <Nav title="Courses">
-            <Link to="/courses/0">iweb</Link>
-            <Link to="/courses/1">iiad</Link>
-            <Link to="/courses/2">idepa</Link>
-            <Link to="/courses/3">ipsenh</Link>
+            {props.courses && props.courses.map(course => <Link key={course._id} to={`/courses/${course._id}`}>{course.name}</Link>)}
         </Nav>
     </div>
 )
