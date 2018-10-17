@@ -48,7 +48,7 @@ address = ":8080"
       backend = "websocket-service"
       entrypoints = ["http"]
     [frontends.websocket-service.routes.api]
-      rule = "Path: /socket.io;ReplacePathRegex: ^/socket.io /socket.io/$1"
+      rule = "PathPrefix: /socket.io;ReplacePathRegex: (.*) $1"
     [frontends.app-web]
       backend = "app-web"
       entrypoints = ["http"]
