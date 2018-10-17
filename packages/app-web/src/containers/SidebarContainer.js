@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/ui/Sidebar';
 import * as CourseService from '../services/CourseService';
 import io from 'socket.io-client';
 
@@ -12,9 +12,7 @@ class SidebarContainer extends React.Component {
     }
 
     componentDidMount() {
-        const socket = io({
-            // path: '/ws/socket.io'
-        });
+        const socket = io();
         socket.on('course.created', (course) => {
             this.setState({
                 courses: this.state.courses.concat([course])

@@ -1,0 +1,33 @@
+.breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    list-style: none;
+    grid-column: span 12;
+    margin-left: -.75rem;
+    font-size: 1.125em;
+}
+
+.breadcrumbs li {
+    display: list-item;
+}
+
+.breadcrumbs li+li {
+    padding-left: .5rem;
+}
+
+.breadcrumbs li+li::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: #6c757d;
+    content: "/";
+}
+
+.breadcrumbs .active {
+    font-weight: bold;
+}
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: #000;
+}

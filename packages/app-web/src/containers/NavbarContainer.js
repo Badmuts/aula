@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/ui/Navbar';
 import AuthService from '../services/AuthService';
 import SearchService from '../services/SearchService';
 

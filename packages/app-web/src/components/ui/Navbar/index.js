@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../forms/login/logo.svg'
+import logo from '../../forms/login/logo.svg'
 import iconSearch from './icon-search.svg'
 import './navbar.css'
 import { Link } from 'react-router-dom'

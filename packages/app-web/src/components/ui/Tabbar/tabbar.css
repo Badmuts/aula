@@ -1,0 +1,27 @@
+.tabs {
+    grid-column: span 12;
+    display: flex;
+    margin-bottom: -11px;
+}
+
+.tabs > span {
+    padding: 9px 15px 11px;
+    border-radius: 3px 3px 0 0;
+    border: solid transparent;
+    border-width: 3px 1px 1px;
+}
+
+.tabs > span.active {
+    border-color: hsl(109, 50%, 74%) rgba(0, 0, 0, .075) transparent;
+    background-color: #fff;
+    font-weight: bold;
+}
+
+.tabs > span a {
+    color: rgba(0, 0, 0, .6);
+    text-decoration: none;
+}
+
+.tabs > span.active a {
+    color: #000;
+}

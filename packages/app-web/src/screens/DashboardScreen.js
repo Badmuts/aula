@@ -1,8 +1,8 @@
 import React from 'react';
 import NavbarContainer from '../containers/NavbarContainer';
 import Sidebar from '../containers/SidebarContainer';
-import Hero from '../components/Hero';
-import Loader from '../components/Loader';
+import Hero from '../components/ui/Hero';
+import Loader from '../components/ui/Loader';
 
 export default (props) => (
     <div>
