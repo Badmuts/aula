@@ -10,7 +10,7 @@ import CourseDetailScreen from '../screens/CourseDetailScreen';
 export default (
     <div>
         <PrivateRoute exact path="/" component={DashboardScreen} />
-        <PrivateRoute exact path="/courses/:id" component={CourseDetailScreen} />
+        <PrivateRoute path="/courses/:id" component={CourseDetailScreen} />
         <Route path="/auth/login" component={LoginScreen} />
         <Route path="/auth/signup" component={SignupContainer} />
     </div>

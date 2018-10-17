@@ -16,6 +16,7 @@ app.get('/healthz', (req, res, next) => {
 
 app.get('/courses', [isAuthenticated], HttpController.find)
 app.post('/courses', [isAuthenticated], HttpController.create)
+app.put('/courses/:id', [isAuthenticated], HttpController.update)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Course = (props) => (
+const Course = ({ course }) => (
     <div>
-        <h1>{props.course.name}</h1>
+        <h1>{course.name || ''}</h1>
     </div>
 )
 

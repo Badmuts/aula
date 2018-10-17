@@ -21,6 +21,15 @@ module.exports = {
             })
     },
 
+    update(id, course) {
+        return Course.update({ _id: id }, course).exec()
+            .then(() => Course.find({ _id: id }).exec())
+            .then(_course => {
+                notify('updated', _course)
+                return _course
+            })
+    },
+
     on(event, cb) {
         observers[event].push(cb)
     }

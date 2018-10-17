@@ -13,5 +13,13 @@ module.exports = {
         CourseRepository.create(course)
             .then(_course => res.status(201).json(_course))
             .catch(next)
+    },
+
+    update(req, res, next) {
+        const course = req.body
+
+        CourseRepository.update(req.params.id, course)
+            .then(_course => res.json(_course))
+            .catch(next)
     }
 }
