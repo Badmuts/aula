@@ -1,0 +1,24 @@
+version: '3'
+services:
+  websocket-service:
+    build:
+      context: ../../
+      dockerfile: packages/websocket/Dockerfile
+    image: badmuts/serverless-websocket:${TAG:-latest}
+    ports:
+      - "3000:3000"
+    volumes:
+      - '/usr/src/app/packages/websocket/node_modules'
+      - './:/usr/src/app/packages/websocket'
+    env_file: .env
+    command: npx nodemon --exec "npm --prefix packages/websocket start"
+    depends_on:
+      - rabbit
+
+  rabbit:
+    image: rabbitmq:management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+    ports:
+      - "15672:15672"

@@ -1,3 +1,5 @@
+# defaultEntryPoints must be at the top because it should not be in any table below
+defaultEntryPoints = ["http", "https", "ws", "wss"]
 
 logLevel = "INFO"
 
@@ -19,6 +21,9 @@ address = ":8080"
     [backends.search-service]
       [backends.search-service.servers.server1]
         url = "http://search-service:3000"
+    [backends.websocket-service]
+      [backends.websocket-service.servers.server1]
+        url = "http://websocket-service:3000"
     [backend.app-web]
       [backends.app-web.servers.server1]
         url = "http://app-web:3000"
@@ -27,18 +32,23 @@ address = ":8080"
     [frontends.user-service]
       backend = "user-service"
       entrypoints = ["http"]
-    [frontends.user-service.routes.user]
+    [frontends.user-service.routes.api]
       rule = "Path: /api/users,/api/users/{id},/api/tokens;ReplacePathRegex: ^/api/(.*) /$1"
     [frontends.course-service]
       backend = "course-service"
       entrypoints = ["http"]
-    [frontends.course-service.routes.user]
+    [frontends.course-service.routes.api]
       rule = "Path: /api/courses,/api/courses/{id};ReplacePathRegex: ^/api/(.*) /$1"
     [frontends.search-service]
       backend = "search-service"
       entrypoints = ["http"]
-    [frontends.search-service.routes.user]
+    [frontends.search-service.routes.api]
       rule = "Path: /api/search;ReplacePathRegex: ^/api/(.*) /$1"
+    [frontends.websocket-service]
+      backend = "websocket-service"
+      entrypoints = ["http"]
+    [frontends.websocket-service.routes.api]
+      rule = "Path: /socket.io;ReplacePathRegex: ^/socket.io /socket.io/$1"
     [frontends.app-web]
       backend = "app-web"
       entrypoints = ["http"]
