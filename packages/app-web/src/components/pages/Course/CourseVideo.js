@@ -19,7 +19,8 @@ export default class CourseVideo extends React.Component {
                 {videos.map(video =>
                     <div key={video._id}>
                         <div ref={this.player} id="player" data-plyr-provider="youtube" data-plyr-embed-id={video.url}></div>
-                        <h1 style={{fontFamily: 'Source Sans Pro'}}>{video.title}</h1>
+                        <h3 style={{fontFamily: 'Source Sans Pro'}}>{video.title}</h3>
+                        <p>{video.description}</p>
                     </div>
                 )}
             </div>

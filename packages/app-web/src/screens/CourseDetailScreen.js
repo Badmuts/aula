@@ -43,18 +43,18 @@ export default class CourseDetailScreen extends React.Component {
                                             <li><a href="/">Courses</a></li>
                                             <li className="active">{this.state.course && this.state.course.name}</li>
                                         </Breadcrumbs>
-                                        <div style={{marginLeft: 'auto'}}>
-                                            <button style={{marginLeft: 'auto'}}>Enroll</button>
-                                            <button style={{marginLeft: 'auto'}}>Watch</button>
+                                        <div className="btn-group" style={{marginLeft: 'auto'}}>
+                                            <button className="btn" style={{marginLeft: 'auto'}}>🎓 Enroll</button>
+                                            <button className="btn active" style={{marginLeft: 'auto'}}>👁 Watch</button>
                                         </div>
                                     </div>
 
                                     <Tabbar>
-                                        <NavLink to={`${this.props.match.url}/module`}>Module</NavLink>
-                                        <NavLink to="#">Content</NavLink>
-                                        <NavLink to="#">Announcements</NavLink>
-                                        <NavLink to={`${this.props.match.url}/videos`}>Videos {(this.state.course.videos && this.state.course.videos.length > 0) && <Badge>{this.state.course.videos.length}</Badge>} </NavLink>
-                                        <NavLink to="#">Settings</NavLink>
+                                        <NavLink to={`${this.props.match.url}/module`}>📚 Module</NavLink>
+                                        <NavLink to="#">📓 Content</NavLink>
+                                        <NavLink to="#">📣 Announcements</NavLink>
+                                        <NavLink to={`${this.props.match.url}/videos`}>🎥 Videos {(this.state.course.videos && this.state.course.videos.length > 0) && <Badge>{this.state.course.videos.length}</Badge>} </NavLink>
+                                        <NavLink to="#">🛠 Settings</NavLink>
                                     </Tabbar>
                                 </div>
                             </div>

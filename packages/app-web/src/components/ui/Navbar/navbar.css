@@ -32,6 +32,10 @@
     transition: all 250ms ease-in-out;
 }
 
+.search input:hover {
+    background-color: #ededed;
+}
+
 .search input:focus {
     border-color: #9BA1A8;
     background-color: #fff;
