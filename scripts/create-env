@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+if [ ! -f .env ]; then
+    cp .env.example .env
+    ./scripts/create-es-keypair .env
+fi
+
+echo "Created .env"

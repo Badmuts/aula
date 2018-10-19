@@ -24,7 +24,19 @@ services:
     volumes:
       - '/usr/src/app/packages/user/node_modules'
       - './packages/user:/usr/src/app/packages/user'
-    env_file: packages/user/.env
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - ACCESS_TOKEN_PRIVATE=${ACCESS_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
+      - RABBIT_HOST=rabbit
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=root
+      - DB_HOST=user-db
+      - DB_DATABASE=user
+      - DB_USER=
+      - DB_PASSWORD=
     command: npx nodemon --exec "npm --prefix packages/user start"
     depends_on:
       - user-db
@@ -41,7 +53,16 @@ services:
     volumes:
       - '/usr/src/app/packages/course/node_modules'
       - './packages/course:/usr/src/app/packages/course'
-    env_file: packages/course/.env
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - RABBIT_HOST=rabbit
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=root
+      - DB_HOST=course-db
+      - DB_DATABASE=course
+      - DB_USER=
+      - DB_PASSWORD=
     command: npx nodemon --exec "npm --prefix packages/course start"
     depends_on:
       - course-db
@@ -58,7 +79,12 @@ services:
     volumes:
       - '/usr/src/app/packages/search/node_modules'
       - './packages/search:/usr/src/app/packages/search'
-    env_file: packages/search/.env
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - RABBIT_HOST=rabbit
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=root
     command: npx nodemon --exec "npm --prefix packages/search start"
     depends_on:
       - elastic
@@ -75,9 +101,12 @@ services:
     volumes:
       - '/usr/src/app/packages/websocket/node_modules'
       - './packages/websocket:/usr/src/app/packages/websocket'
-    env_file: ./packages/websocket/.env
     environment:
-     - DEBUG=*
+      - NODE_ENV=${NODE_ENV:-development}
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - RABBIT_HOST=rabbit
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=root
     command: npx nodemon --exec "npm --prefix packages/websocket start"
     depends_on:
       - rabbit

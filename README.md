@@ -6,6 +6,7 @@ _**Aula** — A microservice oriented webservice exploring the [CNCF](https://ww
 
 * **Microservices**: Implement a webservice using a microservice architecture
 * **Containerized**: Every service should be able to run within its own container.
+* **Cloud Native**: Try to incorporate useful tooling to make the project cloud native.
 * **Serverless**: Explore serverless architecture while still be able to manage own server deployments.
 * **Learn**: Explore latest techniques, tools within the Cloud Native industry and have fun doing so.
 
@@ -13,6 +14,9 @@ _**Aula** — A microservice oriented webservice exploring the [CNCF](https://ww
 Recommend way is to use the provided docker environment:
 
 ```sh
+# setup env
+$ make configure
+# start app
 $ docker-compose up
 ```
 

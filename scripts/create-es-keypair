@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# usage: ./create-es-keypair .env
+
+createKeypair()
+{
+    openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem
+    openssl ec -in ec_private.pem -pubout -out ec_public.pem
+    PRIVATE_KEY=`openssl enc -A -base64 -in ec_private.pem`
+    PUBLIC_KEY=`openssl enc -A -base64 -in ec_public.pem`
+}
+
+$(echo ${PRIVATE_KEY} | sed -n -e "s/^.*${prefix}//p")
+
+createKeypair
+sed -i _orig -e "s/ACCESS_TOKEN_PRIVATE=.*/ACCESS_TOKEN_PRIVATE=${PRIVATE_KEY}/" $1
+sed -i _orig -e "s/ACCESS_TOKEN_PUBLIC=.*/ACCESS_TOKEN_PUBLIC=${PUBLIC_KEY}/" $1
+
+createKeypair
+sed -i _orig -e "s/REFRESH_TOKEN_PRIVATE=.*/REFRESH_TOKEN_PRIVATE=${PRIVATE_KEY}/" $1
+sed -i _orig -e "s/REFRESH_TOKEN_PUBLIC=.*/REFRESH_TOKEN_PUBLIC=${PUBLIC_KEY}/" $1
+
+rm .*_orig
+rm *.pem
