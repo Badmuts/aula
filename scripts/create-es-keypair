@@ -9,12 +9,12 @@ createKeypair()
     PUBLIC_KEY=`openssl enc -A -base64 -in ec_public.pem`
 }
 
-$(echo ${PRIVATE_KEY} | sed -n -e "s/^.*${prefix}//p")
-
+# Create access token keypair
 createKeypair
 sed -i _orig -e "s/ACCESS_TOKEN_PRIVATE=.*/ACCESS_TOKEN_PRIVATE=${PRIVATE_KEY}/" $1
 sed -i _orig -e "s/ACCESS_TOKEN_PUBLIC=.*/ACCESS_TOKEN_PUBLIC=${PUBLIC_KEY}/" $1
 
+# Create refresh token keypair
 createKeypair
 sed -i _orig -e "s/REFRESH_TOKEN_PRIVATE=.*/REFRESH_TOKEN_PRIVATE=${PRIVATE_KEY}/" $1
 sed -i _orig -e "s/REFRESH_TOKEN_PUBLIC=.*/REFRESH_TOKEN_PUBLIC=${PUBLIC_KEY}/" $1
