@@ -12,6 +12,9 @@ address = ":8080"
 
 [file]
   [backends]
+    [backends.auth-service]
+      [backends.auth-service.servers.server1]
+        url = "http://auth-service:3000"
     [backends.user-service]
       [backends.user-service.servers.server1]
         url = "http://user-service:3000"
@@ -33,7 +36,12 @@ address = ":8080"
       backend = "user-service"
       entrypoints = ["http"]
     [frontends.user-service.routes.api]
-      rule = "Path: /api/users,/api/users/{id},/api/tokens;ReplacePathRegex: ^/api/(.*) /$1"
+      rule = "Path: /api/users,/api/users/{id};ReplacePathRegex: ^/api/(.*) /$1"
+    [frontends.auth-service]
+      backend = "auth-service"
+      entrypoints = ["http"]
+    [frontends.auth-service.routes.api]
+      rule = "Path: /api/tokens;ReplacePathRegex: ^/api/(.*) /$1"
     [frontends.course-service]
       backend = "course-service"
       entrypoints = ["http"]

@@ -33,6 +33,7 @@ $ npm start
 ## Packages
 * 💬 [amqp](packages/amqp/README.md)
 * 🦄 [app-web](packages/app-web/README.md)
+* 🔑 [auth](packages/auth/README.md)
 * 🌍 [base-server](packages/base-server/README.md)
 * 📓 [course](packages/course/README.md)
 * 🔐 [crypto](packages/crypto/README.md)

@@ -16,6 +16,27 @@ services:
       - '/usr/src/app/packages/app-web/node_modules'
       - './packages/app-web:/usr/src/app/packages/app-web'
 
+  auth-service:
+    build:
+      context: .
+      dockerfile: packages/auth/Dockerfile
+    image: badmuts/aula-auth:${TAG:-latest}
+    volumes:
+      - '/usr/src/app/packages/auth/node_modules'
+      - './packages/auth:/usr/src/app/packages/auth'
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - ACCESS_TOKEN_PRIVATE=${ACCESS_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
+      - RABBIT_HOST=rabbit
+      - RABBIT_USER=root
+      - RABBIT_PASSWORD=root
+    command: npx nodemon --exec "npm --prefix packages/auth start"
+    depends_on:
+      - rabbit
+
   user-service:
     build:
       context: .
@@ -27,9 +48,6 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - ACCESS_TOKEN_PRIVATE=${ACCESS_TOKEN_PRIVATE}
-      - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
-      - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
       - RABBIT_HOST=rabbit
       - RABBIT_USER=root
       - RABBIT_PASSWORD=root

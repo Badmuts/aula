@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/aula-user",
+  "name": "@badmuts/aula-auth",
   "version": "1.0.2",
   "description": "",
   "main": "src/app.js",
@@ -14,7 +14,6 @@
     "@badmuts/aula-amqp": "^1.0.2",
     "@badmuts/aula-base-server": "^1.0.0",
     "@badmuts/aula-crypto": "^1.0.2",
-    "express-jwt": "^5.3.1",
-    "mongoose": "^5.3.1"
+    "jsonwebtoken": "^8.3.0"
   }
 }

@@ -7,7 +7,7 @@ const isAuthenticated = require('express-jwt')({
 
 const UserHttpController = require('./controllers/user/HttpController')
 const UserAmqpController = require('./controllers/user/AmqpController')
-const TokenHttpController = require('./controllers/token/HttpController');
+const UserRpcController = require('./controllers/user/RpcController')
 
 app.get('/healthz', (req, res, next) => {
     res.json({
@@ -23,9 +23,8 @@ app.put('/users/:id', isAuthenticated, UserHttpController.update)
 app.delete('/users/:id', isAuthenticated, UserHttpController.destroy)
 
 AmqpRouter.command('user.create', UserAmqpController.create)
-
-app.post('/tokens', TokenHttpController.create)
-app.put('/tokens', TokenHttpController.update)
+AmqpRouter.rpc('user.findByEmail', UserRpcController.findByEmail)
+AmqpRouter.rpc('user.findOne', UserRpcController.findOne)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
