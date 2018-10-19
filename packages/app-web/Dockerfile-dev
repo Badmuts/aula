@@ -7,4 +7,5 @@ COPY packages/app-web ./packages/app-web
 
 RUN npm install --loglevel notice --unsafe-perm
 
+EXPOSE 3000
 CMD ["npm", "--prefix", "packages/app-web", "start"]
