@@ -1,5 +1,5 @@
 const CourseRepository = require('./../repositories/CourseRepository')
-const amqp = require('@badmuts/serverless-amqp')
+const amqp = require('@badmuts/aula-amqp')
 
 module.exports = () => {
     CourseRepository.on('created', course => {

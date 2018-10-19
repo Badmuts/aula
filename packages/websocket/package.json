@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-websocket",
+  "name": "@badmuts/aula-websocket",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
@@ -11,8 +11,8 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@badmuts/serverless-amqp": "^1.0.2",
-    "@badmuts/serverless-base-server": "^1.0.0",
+    "@badmuts/aula-amqp": "^1.0.2",
+    "@badmuts/aula-base-server": "^1.0.0",
     "socket.io": "^2.1.1"
   }
 }

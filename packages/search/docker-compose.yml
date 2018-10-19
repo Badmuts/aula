@@ -4,7 +4,7 @@ services:
     build:
       context: ../../
       dockerfile: packages/search/Dockerfile
-    image: badmuts/serverless-search:${TAG:-latest}
+    image: badmuts/aula-search:${TAG:-latest}
     ports:
       - "3000:3000"
     volumes:

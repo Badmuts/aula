@@ -1,4 +1,4 @@
-const amqp = require('@badmuts/serverless-amqp')
+const amqp = require('@badmuts/aula-amqp')
 
 module.exports = (elasticClient) => {
     console.log('Course indexer started...')

@@ -26,7 +26,7 @@ address = ":8080"
         url = "http://websocket-service:3000"
     [backend.app-web]
       [backends.app-web.servers.server1]
-        url = "http://app-web:3000"
+        url = "http://app-web:80"
 
   [frontends]
     [frontends.user-service]

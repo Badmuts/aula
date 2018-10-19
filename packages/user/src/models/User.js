@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const crypto = require('@badmuts/serverless-crypto')
+const crypto = require('@badmuts/aula-crypto')
 
 // create a schema
 const userSchema = new Schema({

@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-user",
+  "name": "@badmuts/aula-user",
   "version": "1.0.2",
   "description": "",
   "main": "src/app.js",
@@ -11,9 +11,9 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@badmuts/serverless-amqp": "^1.0.2",
-    "@badmuts/serverless-base-server": "^1.0.0",
-    "@badmuts/serverless-crypto": "^1.0.2",
+    "@badmuts/aula-amqp": "^1.0.2",
+    "@badmuts/aula-base-server": "^1.0.0",
+    "@badmuts/aula-crypto": "^1.0.2",
     "express-jwt": "^5.3.1",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.1"

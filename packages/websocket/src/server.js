@@ -1,7 +1,7 @@
 const app = require('./app.js')
 const server = require('http').Server(app)
 const io = require('./io.js')(server)
-const amqp = require('@badmuts/serverless-amqp')
+const amqp = require('@badmuts/aula-amqp')
 const PORT = process.env.PORT || 3000
 
 const rabbitConfig = require('./config/rabbit')

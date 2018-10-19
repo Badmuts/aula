@@ -8,7 +8,7 @@ Add this package to your `package.json`
 ```json
 {
   "dependencies": {
-    "@badmuts/serverless-base-server": "1.0.0"
+    "@badmuts/aula-base-server": "1.0.0"
   }
 }
 ```
@@ -16,7 +16,7 @@ Add this package to your `package.json`
 And require it just like express
 
 ```js
-const app = require('@badmuts/serverless-base-server')
+const app = require('@badmuts/aula-base-server')
 
 app.get('/', (req, res, next) => res.json({
     message: 'Hello World!'

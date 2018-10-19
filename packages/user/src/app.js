@@ -1,5 +1,5 @@
-const app = require('@badmuts/serverless-base-server')
-const amqp = require('@badmuts/serverless-amqp')
+const app = require('@badmuts/aula-base-server')
+const amqp = require('@badmuts/aula-amqp')
 const AmqpRouter = amqp.Router('user-service')
 const isAuthenticated = require('express-jwt')({
     secret: require('./config/jwt').accessToken.publicKey

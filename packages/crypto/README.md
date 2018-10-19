@@ -8,7 +8,7 @@ Add this package to your `package.json`
 ```json
 {
   "dependencies": {
-    "@badmuts/serverless-crypto": "1.0.0"
+    "@badmuts/aula-crypto": "1.0.0"
   }
 }
 ```
@@ -16,7 +16,7 @@ Add this package to your `package.json`
 And require it just like express
 
 ```js
-const crypto = require('@badmuts/serverless-crypto')
+const crypto = require('@badmuts/aula-crypto')
 
 const password = 'Super-secure-password'
 

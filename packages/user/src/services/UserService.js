@@ -1,5 +1,5 @@
 const UserRepository = require('./../repositories/UserRepository')
-const crypto = require('@badmuts/serverless-crypto')
+const crypto = require('@badmuts/aula-crypto')
 
 module.exports = {
     create(user) {

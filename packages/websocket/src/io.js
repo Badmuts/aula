@@ -1,5 +1,5 @@
 const io = require('socket.io')
-const amqp = require('@badmuts/serverless-amqp')
+const amqp = require('@badmuts/aula-amqp')
 
 module.exports = function(server) {
     const wss = io(server)

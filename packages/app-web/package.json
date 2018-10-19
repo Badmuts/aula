@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-app-web",
+  "name": "@badmuts/aula-app-web",
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "version": "1.0.0",
   "dependencies": {

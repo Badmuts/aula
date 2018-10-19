@@ -1,5 +1,5 @@
 {
-  "name": "@badmuts/serverless-base-server",
+  "name": "@badmuts/aula-base-server",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",

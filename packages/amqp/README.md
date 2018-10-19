@@ -8,7 +8,7 @@ Add this package to your `package.json`
 ```json
 {
   "dependencies": {
-    "@badmuts/serverless-amqp": "1.0.0",
+    "@badmuts/aula-amqp": "1.0.0",
   }
 }
 ```
@@ -16,7 +16,7 @@ Add this package to your `package.json`
 Configure and start using AMQP
 
 ```js
-const amqp = require('@badmuts/serverless-amqp')
+const amqp = require('@badmuts/aula-amqp')
 
 // Configure AMQP, in this case RabbitMQ
 amqp.configure('amq.topic', 'rabbit', 5672, 'root', 'root')
