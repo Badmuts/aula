@@ -1,9 +1,10 @@
 <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/cloud-with-lightning_1f329.png" width="75"/>
 
-_**Serverless** — A webservice exploring the [CNCF](https://www.cncf.io/) landscape_
+_**Aula** — A webservice exploring the [CNCF](https://www.cncf.io/) landscape_
 
 ## Goals
 
+* **Microservices**: Implement a webservice using a microservice architecture
 * **Containerized**: Every service should be able to run within its own container.
 * **Serverless**: Explore serverless architecture while still be able to manage own server deployments.
 * **Learn**: Explore latest techniques, tools within the Cloud Native industry and have fun doing so.
