@@ -1,5 +1,3 @@
-# Name of the image
-IMAGE	= badmuts/aula-
 # Current branch-commit (example: master-ab01c1z)
 CURRENT	= $$(git rev-parse --abbrev-ref HEAD | sed 's/\//-/g')-$$(git rev-parse HEAD | cut -c1-7)
 TAG		= $(CURRENT)
