@@ -10,6 +10,12 @@ _**Aula** — A microservice oriented webservice exploring the [CNCF](https://ww
 * **Learn**: Explore latest techniques, tools within the Cloud Native industry and have fun doing so.
 
 ## Getting started
+Recommend way is to use the provided docker environment:
+
+```sh
+$ docker-compose up
+```
+
 This repo is exploring the monorepo paradigm. To facilitate this [Lerna](https://github.com/lerna/lerna) is used. Getting started should be as simple as running `npm install`:
 
 ```sh
@@ -18,12 +24,6 @@ $ npm install
 $ npm run start:client
 # Run server
 $ npm run start:user
-```
-
-Recommend way is to use the provided docker environment:
-
-```sh
-$ docker-compose up
 ```
 
 ## Packages
