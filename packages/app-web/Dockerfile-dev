@@ -7,6 +7,4 @@ COPY packages/app-web ./packages/app-web
 
 RUN npm install --loglevel notice --unsafe-perm
 
-EXPOSE 80
-ENV PORT=80
 CMD ["npm", "--prefix", "packages/app-web", "start"]
