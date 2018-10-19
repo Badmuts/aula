@@ -24,11 +24,11 @@ This repo is exploring the monorepo paradigm. To facilitate this [Lerna](https:/
 
 ```sh
 $ npm install
-# Run client
-$ npm run start:client
-# Run server
-$ npm run start:user
+# start app
+$ npm start
 ```
+
+> **Note:** This method requires you to setup your own environment
 
 ## Packages
 * 💬 [amqp](packages/amqp/README.md)
