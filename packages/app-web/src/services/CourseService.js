@@ -1,6 +1,7 @@
 import http, { handleError, http$ } from './../utils/http';
 import { BehaviorSubject } from 'rxjs';
-import { switchMap, distinct, distinctUntilKeyChanged } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import unionBy from 'lodash/unionBy';
 
 const CourseCollection = new BehaviorSubject([])
 
@@ -18,7 +19,7 @@ export const find$ = () => http$({
 })
     .pipe(
         switchMap(courses => {
-            CourseCollection.next(CourseCollection.getValue().concat(courses))
+            CourseCollection.next(unionBy(CourseCollection.getValue(), courses, '_id'))
             return CourseCollection
         })
     )

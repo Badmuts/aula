@@ -22,7 +22,7 @@ app.put('/users/:id', isAuthenticated, UserHttpController.update)
 app.delete('/users/:id', isAuthenticated, UserHttpController.destroy)
 
 nats.subscribe('user.findByEmail', UserMessageController.findByEmail);
-nats.subscribe('user.findOne', UserMessageController.findByEmail);
+nats.subscribe('user.findOne', UserMessageController.findOne);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
