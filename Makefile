@@ -16,5 +16,10 @@ push:
 
 release: build push
 
+# Provision dev, staging, qa and prod env
+provision:
+	@echo "[i] Not implemented yet"
+
+# Deploy
 deploy:
 	@echo "[i] Not implemented yet"

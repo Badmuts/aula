@@ -3,14 +3,17 @@ import NavbarContainer from '../containers/NavbarContainer';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Tabbar from '../components/ui/Tabbar';
 import Header from '../components/ui/Header';
-import Course from '../components/pages/Course';
+import CourseModule from '../components/pages/course/CourseModule';
+import CourseContent from '../components/pages/course/CourseContent';
+import CourseVideo from '../components/pages/course/CourseVideo';
+import CourseAnnouncements from '../components/pages/course/CourseAnnoucements';
 import Loader from '../components/ui/Loader';
 import {Switch, Route, Redirect, NavLink} from 'react-router-dom'
 
 import * as CourseService from '../services/CourseService';
-import CourseVideo from '../components/pages/Course/CourseVideo';
 import Badge from '../components/ui/Badge';
 import { map } from 'rxjs/operators';
+import CourseSettings from '../components/pages/course/CourseSettings';
 
 export default class CourseDetailScreen extends React.Component {
     constructor(props) {
@@ -19,13 +22,23 @@ export default class CourseDetailScreen extends React.Component {
             isFetching: false,
             course: {}
         }
+        this.stream = null
     }
 
     componentDidMount() {
         this.setState({ isFetching: true })
-        CourseService.find$()
-            .pipe(map(courses => courses.filter(c => c._id === this.props.match.params.id).pop()))
-            .subscribe(course => this.setState({ course }), null, () => this.setState({ isFetching: false }))
+        this.stream = CourseService.find$()
+            .pipe(
+                map(courses => courses.filter(c => c._id === this.props.match.params.id).pop())
+            )
+            .subscribe(
+                course => this.setState({ course, isFetching: false }, () => console.log('updated', course)),
+                () => this.setState({ isFetching: false })
+            )
+    }
+
+    componentWillUnmount() {
+        this.stream.unsubscribe()
     }
 
     render() {
@@ -51,10 +64,10 @@ export default class CourseDetailScreen extends React.Component {
 
                                     <Tabbar>
                                         <NavLink to={`${this.props.match.url}/module`}>📚 Module</NavLink>
-                                        <NavLink to="#">📓 Content</NavLink>
-                                        <NavLink to="#">📣 Announcements</NavLink>
+                                        <NavLink to={`${this.props.match.url}/content`}>📓 Content</NavLink>
+                                        <NavLink to={`${this.props.match.url}/announcements`}>📣 Announcements</NavLink>
                                         <NavLink to={`${this.props.match.url}/videos`}>🎥 Videos {(this.state.course.videos && this.state.course.videos.length > 0) && <Badge>{this.state.course.videos.length}</Badge>} </NavLink>
-                                        <NavLink to="#">🛠 Settings</NavLink>
+                                        <NavLink to={`${this.props.match.url}/settings`}>🛠 Settings</NavLink>
                                     </Tabbar>
                                 </div>
                             </div>
@@ -62,17 +75,16 @@ export default class CourseDetailScreen extends React.Component {
                         <div className="container">
                             <div style={styles.courseContainer}>
                             <Switch>
-                                <Route path={`${this.props.match.url}/module`} render={props => <Course course={this.state.course} {...props} />} />
-                                <Route path={`${this.props.match.url}/videos`} render={props => <CourseVideo videos={this.state.course.videos || []} />} />
+                                <Route path={`${this.props.match.url}/module`} render={props => <CourseModule course={this.state.course} {...props} />} />
+                                <Route path={`${this.props.match.url}/content`} render={props => <CourseContent {...this.state} {...props} />} />
+                                <Route path={`${this.props.match.url}/announcements`} render={props => <CourseAnnouncements {...this.state} {...props} />} />
+                                <Route path={`${this.props.match.url}/videos`} render={props => <CourseVideo videos={this.state.course.videos || []} {...props} />} />
+                                <Route path={`${this.props.match.url}/settings`} render={props => <CourseSettings {...this.state} {...props} />} />
                                 <Redirect to={`${this.props.match.url}/module`} />
                             </Switch>
-                                {/* {this.state.course && <Course course={this.state.course} />} */}
-                                {/* <pre>{JSON.stringify(this.state.course, null, 2)}</pre> */}
                             </div>
                         </div>
                     </div>}
-
-
             </div>
         )
     }

@@ -17,8 +17,15 @@ class SidebarContainer extends React.Component {
                 courses: this.state.courses.concat([course])
             })
         });
-        CourseService.find()
-            .then(courses => this.setState({ courses }))
+
+        this.stream = CourseService.find$()
+            .subscribe(
+                courses => this.setState({ courses })
+            )
+    }
+
+    componentWillUnmount() {
+        this.stream.unsubscribe()
     }
 
     render() {

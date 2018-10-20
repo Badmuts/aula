@@ -1,8 +1,8 @@
-import http, { handleError } from './../utils/http';
-import { ajax } from 'rxjs/ajax'
-import { map } from 'rxjs/operators'
-import AuthService from './AuthService';
+import http, { handleError, http$ } from './../utils/http';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap, distinct, distinctUntilKeyChanged } from 'rxjs/operators';
 
+const CourseCollection = new BehaviorSubject([])
 
 export const find = () => http('/api/courses')
     .then(handleError)
@@ -12,10 +12,13 @@ export const findOne = id => http(`/api/courses/${id}`)
     .then(handleError)
     .then(res => res.json())
 
-export const find$ = () => ajax({
+export const find$ = () => http$({
     url: `/api/courses`,
-    method: 'GET',
-    headers: { 'Authorization': `Bearer ${AuthService.tokenPair.accessToken}` }
-}).pipe(
-    map(res => res.response)
-)
+    method: 'GET'
+})
+    .pipe(
+        switchMap(courses => {
+            CourseCollection.next(CourseCollection.getValue().concat(courses))
+            return CourseCollection
+        })
+    )

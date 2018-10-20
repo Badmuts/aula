@@ -75,6 +75,3 @@ export const http$ = (options) => of(options)
         switchMap(_options => ajax(_options)),
         map(res => res.response)
     )
-
-http$({ url: `/api/courses` })
-    .subscribe(console.log)
