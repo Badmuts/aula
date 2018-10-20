@@ -42,4 +42,4 @@ $ npm start
 
 
 ## Screenshots
-<img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?dl=1">
+<img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
