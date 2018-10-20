@@ -38,7 +38,7 @@ export class Navbar extends React.Component {
                                 {this.props.isLoading
                                     ? <Loader />
                                     : (<div>
-                                        {this.props.searchResults.map(item => <div className="search-item" key={item._id} onClick={() => this.props.history.push(`/courses/${item._id}`)}>{item._source.name}</div>)}
+                                        {this.props.searchResults.map(item => <div className="search-item" key={item._id} onMouseDown={() => this.props.history.push(`/courses/${item._id}`)}>{item._source.name}</div>)}
                                         </div>
                                     )
                                 }

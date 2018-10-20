@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/ui/Sidebar';
 import * as CourseService from '../services/CourseService';
-import socket from '../utils/io'
 
 class SidebarContainer extends React.Component {
     constructor(props) {
@@ -12,12 +11,6 @@ class SidebarContainer extends React.Component {
     }
 
     componentDidMount() {
-        socket.on('course.created', (course) => {
-            this.setState({
-                courses: this.state.courses.concat([course])
-            })
-        });
-
         this.stream = CourseService.find$()
             .subscribe(
                 courses => this.setState({ courses })

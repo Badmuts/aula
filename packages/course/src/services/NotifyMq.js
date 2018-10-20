@@ -7,4 +7,8 @@ module.exports = () => {
     CourseRepository.on('created', course => {
         nats.publish('*.*.course.created', course)
     })
+
+    CourseRepository.on('updated', course => {
+        nats.publish('*.*.course.updated', course)
+    })
 }

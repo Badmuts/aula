@@ -5,7 +5,7 @@ const nats = NATS.connect(natsConfig);
 
 module.exports = function(server) {
     const wss = io(server)
-    wss.on('connection', (ws) => {
+    wss.on('connection', ws => {
         console.log('NEW CONNECTION')
         ws.on('error', console.log);
     })
@@ -13,6 +13,11 @@ module.exports = function(server) {
     nats.subscribe('*.*.course.created', function(course) {
         console.log('course created', course)
         wss.emit('course.created', course)
+    })
+
+    nats.subscribe('*.*.course.updated', function(course) {
+        console.log('course updated', course)
+        wss.emit('course.updated', course)
     })
 
     return wss;

@@ -26,6 +26,10 @@ export default class CourseDetailScreen extends React.Component {
     }
 
     componentDidMount() {
+        this.findCourse()
+    }
+
+    findCourse() {
         this.setState({ isFetching: true })
         this.stream = CourseService.find$()
             .pipe(
@@ -39,6 +43,12 @@ export default class CourseDetailScreen extends React.Component {
 
     componentWillUnmount() {
         this.stream.unsubscribe()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.findCourse()
+        }
     }
 
     render() {
