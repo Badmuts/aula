@@ -1,5 +1,7 @@
 const io = require('socket.io')
-const amqp = require('@badmuts/aula-amqp')
+const NATS = require('nats')
+const natsConfig = require('./config/nats')
+const nats = NATS.connect(natsConfig);
 
 module.exports = function(server) {
     const wss = io(server)
@@ -8,13 +10,10 @@ module.exports = function(server) {
         ws.on('error', console.log);
     })
 
-    amqp.Queue('websocket-service.course.created', ['*.*.course.created.#'])
-        .then(() => {
-            amqp.consume('websocket-service.course.created', (message) => {
-                const course = message.content
-                console.log('course created', course)
-                wss.emit('course.created', course)
-            })
-        })
+    nats.subscribe('*.*.course.created', function(course) {
+        console.log('course created', course)
+        wss.emit('course.created', course)
+    })
+
     return wss;
 }

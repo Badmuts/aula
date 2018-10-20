@@ -30,12 +30,10 @@ services:
       - ACCESS_TOKEN_PRIVATE=${ACCESS_TOKEN_PRIVATE}
       - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
       - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
-      - RABBIT_HOST=rabbit
-      - RABBIT_USER=root
-      - RABBIT_PASSWORD=root
+      - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/auth start"
     depends_on:
-      - rabbit
+      - nats
 
   user-service:
     build:
@@ -48,17 +46,15 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - RABBIT_HOST=rabbit
-      - RABBIT_USER=root
-      - RABBIT_PASSWORD=root
       - DB_HOST=user-db
       - DB_DATABASE=user
       - DB_USER=
       - DB_PASSWORD=
+      - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/user start"
     depends_on:
       - user-db
-      - rabbit
+      - nats
 
   user-db:
     image: mongo:4.1-xenial
@@ -74,17 +70,15 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - RABBIT_HOST=rabbit
-      - RABBIT_USER=root
-      - RABBIT_PASSWORD=root
       - DB_HOST=course-db
       - DB_DATABASE=course
       - DB_USER=
       - DB_PASSWORD=
+      - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/course start"
     depends_on:
       - course-db
-      - rabbit
+      - nats
 
   course-db:
     image: mongo:4.1-xenial
@@ -100,13 +94,11 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - RABBIT_HOST=rabbit
-      - RABBIT_USER=root
-      - RABBIT_PASSWORD=root
+      - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/search start"
     depends_on:
       - elastic
-      - rabbit
+      - nats
 
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
@@ -122,15 +114,10 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - RABBIT_HOST=rabbit
-      - RABBIT_USER=root
-      - RABBIT_PASSWORD=root
+      - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/websocket start"
     depends_on:
-      - rabbit
+      - nats
 
-  rabbit:
-    image: rabbitmq:management-alpine
-    environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=root
+  nats:
+    image: nats:1.3.0

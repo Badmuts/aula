@@ -31,7 +31,6 @@ $ npm start
 > **Note:** This method requires you to setup your own environment
 
 ## Packages
-* 💬 [amqp](packages/amqp)
 * 🦄 [app-web](packages/app-web)
 * 🔑 [auth](packages/auth)
 * 🌍 [base-server](packages/base-server)

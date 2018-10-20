@@ -1,13 +1,12 @@
 const app = require('@badmuts/aula-base-server')
-const amqp = require('@badmuts/aula-amqp')
-const AmqpRouter = amqp.Router('user-service')
 const isAuthenticated = require('express-jwt')({
     secret: require('./config/jwt').accessToken.publicKey
 })
+const NATS = require('nats')
+const nats = NATS.connect(require('./config/nats'));
 
 const UserHttpController = require('./controllers/user/HttpController')
-const UserAmqpController = require('./controllers/user/AmqpController')
-const UserRpcController = require('./controllers/user/RpcController')
+const UserMessageController = require('./controllers/user/MessageController')
 
 app.get('/healthz', (req, res, next) => {
     res.json({
@@ -22,9 +21,8 @@ app.get('/users/:id', isAuthenticated, UserHttpController.findOne)
 app.put('/users/:id', isAuthenticated, UserHttpController.update)
 app.delete('/users/:id', isAuthenticated, UserHttpController.destroy)
 
-AmqpRouter.command('user.create', UserAmqpController.create)
-AmqpRouter.rpc('user.findByEmail', UserRpcController.findByEmail)
-AmqpRouter.rpc('user.findOne', UserRpcController.findOne)
+nats.subscribe('user.findByEmail', UserMessageController.findByEmail);
+nats.subscribe('user.findOne', UserMessageController.findByEmail);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

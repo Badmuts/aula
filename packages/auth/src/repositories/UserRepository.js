@@ -1,19 +1,21 @@
-const amqp = require('@badmuts/aula-amqp')
+const NATS = require('nats')
+const nats = NATS.connect(require('./../config/nats'));
 
 module.exports = {
     findOne(id) {
-        return amqp.rpc('user.findOne', { id })
-            .then(payload => {
-                if (payload.email) return payload;
-                throw new Error(payload)
+        return new Promise(resolve => {
+            nats.requestOne('user.findOne', { id }, response => {
+                resolve(response)
             })
+        })
     },
 
     findByEmail(email) {
-        return amqp.rpc('user.findByEmail', { email })
-            .then(payload => {
-                if (payload.email) return payload;
-                throw new Error(payload)
-            })
+        return new Promise(resolve =>
+            nats.requestOne(
+                'user.findByEmail', { email },
+                response => resolve(response)
+            )
+        )
     }
 }

@@ -1,6 +1,4 @@
 const app = require('@badmuts/aula-base-server')
-const amqp = require('@badmuts/aula-amqp')
-const AmqpRouter = amqp.Router('search-service')
 const isAuthenticated = require('express-jwt')({
     secret: require('./config/jwt').publicKey
 })

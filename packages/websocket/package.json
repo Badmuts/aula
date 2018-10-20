@@ -11,8 +11,8 @@
   "author": "Daan Rosbergen <d.rosbergen@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@badmuts/aula-amqp": "^1.0.2",
     "@badmuts/aula-base-server": "^1.0.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "nats": "^1.0.1"
   }
 }

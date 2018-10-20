@@ -1,8 +1,10 @@
 const CourseRepository = require('./../repositories/CourseRepository')
-const amqp = require('@badmuts/aula-amqp')
+const NATS = require('nats')
+const natsConfig = require('../config/nats')
+const nats = NATS.connect(natsConfig);
 
 module.exports = () => {
     CourseRepository.on('created', course => {
-        amqp.publish('*.*.course.created.#', course)
+        nats.publish('*.*.course.created', course)
     })
 }
