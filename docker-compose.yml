@@ -11,7 +11,7 @@ services:
     build:
       context: .
       dockerfile: packages/app-web/Dockerfile
-    image: badmuts/aula-app-web:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-app-web:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/app-web/node_modules'
       - './packages/app-web:/usr/src/app/packages/app-web'
@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: packages/auth/Dockerfile
-    image: badmuts/aula-auth:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-auth:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/auth/node_modules'
       - './packages/auth:/usr/src/app/packages/auth'
@@ -39,7 +39,7 @@ services:
     build:
       context: .
       dockerfile: packages/user/Dockerfile
-    image: badmuts/aula-user:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-user:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/user/node_modules'
       - './packages/user:/usr/src/app/packages/user'
@@ -63,7 +63,7 @@ services:
     build:
       context: .
       dockerfile: packages/course/Dockerfile
-    image: badmuts/aula-course:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-course:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/course/node_modules'
       - './packages/course:/usr/src/app/packages/course'
@@ -87,7 +87,7 @@ services:
     build:
       context: .
       dockerfile: packages/search/Dockerfile
-    image: badmuts/aula-search:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-search:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/search/node_modules'
       - './packages/search:/usr/src/app/packages/search'
@@ -107,7 +107,7 @@ services:
     build:
       context: .
       dockerfile: packages/websocket/Dockerfile
-    image: badmuts/aula-websocket:${TAG:-latest}
+    image: ${REPO:-badmuts}/aula-websocket:${TAG:-latest}
     volumes:
       - '/usr/src/app/packages/websocket/node_modules'
       - './packages/websocket:/usr/src/app/packages/websocket'

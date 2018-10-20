@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+INFO="${bold}$(tput setaf 2)INFO:   ${normal}"
+QUEST="${bold}$(tput setaf 4)QUEST:  ${normal}"
+
+function echo_info() {
+    echo "${INFO} $*"
+}
+
+CURRENT=$(git rev-parse --abbrev-ref HEAD | sed 's/\//-/g')-$(git rev-parse HEAD | cut -c1-7)
+
+read -r -p "${QUEST} Version tag:[${CURRENT}] -> " response
+[ -z "${response}" ] && response=${CURRENT}
+
+echo_info "Starting build for version ${response}"
+
+TAG=$response docker-compose -f docker-compose.yml build
