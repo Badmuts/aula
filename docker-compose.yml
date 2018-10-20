@@ -134,5 +134,3 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
-    ports:
-      - "15672:15672"
