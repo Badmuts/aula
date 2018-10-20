@@ -31,14 +31,15 @@ $ npm start
 > **Note:** This method requires you to setup your own environment
 
 ## Packages
-* 💬 [amqp](packages/amqp/README.md)
-* 🦄 [app-web](packages/app-web/README.md)
-* 🔑 [auth](packages/auth/README.md)
-* 🌍 [base-server](packages/base-server/README.md)
-* 📓 [course](packages/course/README.md)
-* 🔐 [crypto](packages/crypto/README.md)
-* 🕵️‍♂️ [search](packages/search/README.md)
-* 👨‍🎨 [user](packages/user/README.md)
+* 💬 [amqp](packages/amqp)
+* 🦄 [app-web](packages/app-web)
+* 🔑 [auth](packages/auth)
+* 🌍 [base-server](packages/base-server)
+* 📓 [course](packages/course)
+* 🔐 [crypto](packages/crypto)
+* 🕵️‍♂️ [search](packages/search)
+* 👨‍🎨 [user](packages/user)
+* 🔮 [websocket](packages/websocket)
 
 
 ## Screenshots
