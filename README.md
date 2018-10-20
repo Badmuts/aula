@@ -40,6 +40,18 @@ $ npm start
 * 👨‍🎨 [user](packages/user)
 * 🔮 [websocket](packages/websocket)
 
-
 ## Screenshots
 <img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
+
+## Release
+Releasing a new version can be done via the `make release` command. This command will ask you for
+a version tag or fallback to `branchname-commithash`. After the build images will be pushed to the
+hub.
+
+```sh
+# Build and push images
+$ make release
+QUEST:   Version tag?:[master-87265e6] -> 1.0.0
+INFO:    Starting build for version 1.0.0
+...
+```
