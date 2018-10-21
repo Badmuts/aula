@@ -14,6 +14,15 @@ else
     exit 1
 fi
 
+# Check for kubectl
+if [ $(command -v kubectl) ]; then
+    echo "terraform installed"
+else
+    echo "please install kubectl ( https://kubernetes.io/docs/tasks/tools/install-kubectl/ )"
+    echo "brew install kubernetes-cli"
+    exit 1
+fi
+
 # Switch to terraform directory
 cd operations/provision/terraform
 
@@ -34,8 +43,6 @@ fi
 
 # Download deps
 terraform init
-# Show this plan to your boss
-terraform plan
 # Start the provisioning
 terraform apply
 

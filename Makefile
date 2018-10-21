@@ -16,6 +16,9 @@ release: build push
 provision:
 	@./scripts/provision
 
+provision-teardown:
+	@cd operations/provision/terraform; terraform destroy; cd -
+
 # Deploy
 deploy:
 	@echo "[i] Not implemented yet"
