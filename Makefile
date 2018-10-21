@@ -14,7 +14,7 @@ release: build push
 
 # Provision dev, staging, qa and prod env
 provision:
-	@echo "[i] Not implemented yet"
+	@./scripts/provision
 
 # Deploy
 deploy:

@@ -8,8 +8,13 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 
+# editors and env
 .env
 .vscode/
-
-docker-compose.override.yml
 *.pem
+*_orig
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfvars

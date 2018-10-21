@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -e
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+INFO="${bold}$(tput setaf 2)INFO:   ${normal}"
+QUEST="${bold}$(tput setaf 4)QUEST:  ${normal}"
+
+# Check for terraform
+if [ $(command -v terraform) ]; then
+    echo "terraform installed"
+else
+    echo "please install terraform ( https://www.terraform.io )"
+    exit 1
+fi
+
+# Switch to terraform directory
+cd operations/provision/terraform
+
+# Check if .tfvars is present, otherwise help setup
+if [ ! -f terraform.tfvars ]; then
+    cp terraform.tfvars.example terraform.tfvars
+    # Ask for AWS access_key id and write to tfvars
+    read -r -p "${QUEST} AWS access_key? -> " response
+    sed -i _orig -e "s/access_key=.*/access_key=\"${response}\"/" terraform.tfvars
+
+    # Ask for AWS secret_key and write to tfvars
+    read -r -p "${QUEST} AWS secret_key? -> " response
+    sed -i _orig -e "s/secret_key=.*/secret_key=\"${response}\"/" terraform.tfvars
+
+    # Cleanup sed files
+    rm terraform.tfvars_orig
+fi
+
+# Download deps
+terraform init
+# Show this plan to your boss
+terraform plan
+# Start the provisioning
+terraform apply
+
+# Back to start
+cd ../../../
