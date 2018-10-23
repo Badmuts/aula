@@ -6,11 +6,16 @@ metadata:
   labels:
     name: search-service
 spec:
+  selector:
+    matchLabels:
+      app: search-service
+      tier: backend
   replicas: 1
   template:
     metadata:
       labels:
-        name: search-service
+        app: search-service
+        tier: backend
     spec:
       containers:
       - name: search-service

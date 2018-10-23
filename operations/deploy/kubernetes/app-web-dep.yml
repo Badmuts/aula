@@ -4,15 +4,20 @@ kind: Deployment
 metadata:
   name: app-web
 spec:
+selector:
+    matchLabels:
+      app: app-web
+      tier: frontend
   replicas: 1
   template:
     metadata:
       labels:
-        name: app-web
+        app: app-web
+        tier: frontend
     spec:
       containers:
       - name: app-web
-        image: badmuts/aula-app-web:master-70de202
+        image: badmuts/aula-app-web:latest
         resources:
           limits:
             cpu: 300m

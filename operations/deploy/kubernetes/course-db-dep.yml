@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: course-db
+  labels:
+    name: course-db
+spec:
+  selector:
+    matchLabels:
+      app: course-db
+      tier: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: course-db
+        tier: database
+    spec:
+      containers:
+      - name: course-db
+        image: mongo:4.1-xenial
+        ports:
+          - containerPort: 27017

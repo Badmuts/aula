@@ -6,11 +6,16 @@ metadata:
   labels:
     name: websocket-service
 spec:
+  selector:
+    matchLabels:
+      app: websocket-service
+      tier: backend
   replicas: 1
   template:
     metadata:
       labels:
-        name: websocket-service
+        app: websocket-service
+        tier: backend
     spec:
       containers:
       - name: websocket-service

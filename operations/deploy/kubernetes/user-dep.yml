@@ -2,19 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: course-service
+  name: user-service
   labels:
-    name: course-service
+    name: user-service
 spec:
+  selector:
+    matchLabels:
+      app: user-service
+      tier: backend
   replicas: 1
   template:
     metadata:
       labels:
-        name: course-service
+        app: user-service
+        tier: backend
     spec:
       containers:
-      - name: course-service
-        image: badmuts/aula-course:latest
+      - name: user-service
+        image: badmuts/aula-user:latest
         ports:
           - containerPort: 3000
         env:
@@ -24,15 +29,15 @@ spec:
                 name: auth
                 key: ACCESS_TOKEN_PUBLIC
           - name: DB_HOST
-            value: course-db
+            value: user-db
           - name: DB_DATABASE
-            value: course
+            value: user
           - name: DB_USER
-            value: course
+            value: user
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: course
+                name: user
                 key: DB_PASSWORD
           - name: NATS_HOST
             value: nats

@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic
+  labels:
+    name: elastic
+spec:
+  selector:
+    matchLabels:
+      app: elastic
+      tier: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: elastic
+        tier: database
+    spec:
+      containers:
+      - name: elastic
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+        ports:
+          - containerPort: 9200
