@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: course-service
-        image: badmuts/aula-course:latest
+        image: badmuts/aula-course:0.0.1
         ports:
           - containerPort: 3000
         env:

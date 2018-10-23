@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: badmuts/aula-user:latest
+        image: badmuts/aula-user:0.0.1
         ports:
           - containerPort: 3000
         env:

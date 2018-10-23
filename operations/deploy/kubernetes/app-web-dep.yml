@@ -17,7 +17,7 @@ selector:
     spec:
       containers:
       - name: app-web
-        image: badmuts/aula-app-web:latest
+        image: badmuts/aula-app-web:0.0.1
         resources:
           limits:
             cpu: 300m

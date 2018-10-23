@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: search-service
-        image: badmuts/aula-search:latest
+        image: badmuts/aula-search:0.0.1
         ports:
           - containerPort: 3000
         env:
