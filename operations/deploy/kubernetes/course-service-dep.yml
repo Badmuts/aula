@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: course-service
+  labels:
+    name: course-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: course-service
+    spec:
+      containers:
+      - name: course-service
+        image: badmuts/aula-course:latest
+        ports:
+          - containerPort: 3000
+        env:
+          - name: ACCESS_TOKEN_PUBLIC
+            valueFrom:
+              secretKeyRef:
+                name: auth
+                key: ACCESS_TOKEN_PUBLIC
+          - name: DB_HOST
+            value: course-db
+          - name: DB_DATABASE
+            value: course
+          - name: DB_USER
+            value: course
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: course
+                key: DB_PASSWORD
+          - name: NATS_HOST
+            value: nats

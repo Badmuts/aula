@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-service
+  labels:
+    name: websocket-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: websocket-service
+    spec:
+      containers:
+      - name: websocket-service
+        image: badmuts/aula-websocket:latest
+        ports:
+          - containerPort: 3000
+        env:
+          - name: ACCESS_TOKEN_PUBLIC
+            valueFrom:
+              secretKeyRef:
+                name: auth
+                key: ACCESS_TOKEN_PUBLIC
+          - name: NATS_HOST
+            value: nats

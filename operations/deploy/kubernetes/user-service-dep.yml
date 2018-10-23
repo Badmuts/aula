@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  labels:
+    name: user-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: badmuts/aula-user:latest
+        ports:
+          - containerPort: 3000
+        env:
+          - name: ACCESS_TOKEN_PUBLIC
+            valueFrom:
+              secretKeyRef:
+                name: auth
+                key: ACCESS_TOKEN_PUBLIC
+          - name: DB_HOST
+            value: user-db
+          - name: DB_DATABASE
+            value: user
+          - name: DB_USER
+            value: user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: user
+                key: DB_PASSWORD
+          - name: NATS_HOST
+            value: nats
