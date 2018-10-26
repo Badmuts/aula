@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nats
-  labels:
-    name: nats
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: nats
-      tier: messaging
-  replicas: 1
   template:
     metadata:
       labels:
         app: nats
-        tier: messaging
     spec:
       containers:
       - name: nats

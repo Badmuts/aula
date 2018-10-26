@@ -4,16 +4,14 @@ kind: Deployment
 metadata:
   name: app-web
 spec:
-selector:
+  replicas: 1
+  selector:
     matchLabels:
       app: app-web
-      tier: frontend
-  replicas: 1
   template:
     metadata:
       labels:
         app: app-web
-        tier: frontend
     spec:
       containers:
       - name: app-web

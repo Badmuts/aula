@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-service
-  labels:
-    name: auth-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: auth-service
-      tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
         app: auth-service
-        tier: backend
     spec:
       containers:
       - name: auth-service
@@ -26,22 +22,34 @@ spec:
           - name: ACCESS_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PUBLIC
           - name: ACCESS_TOKEN_PRIVATE
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PRIVATE
           - name: REFRESH_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: REFRESH_TOKEN_PUBLIC
           - name: REFRESH_TOKEN_PRIVATE
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: REFRESH_TOKEN_PRIVATE
           - name: NATS_HOST
             value: nats
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 3

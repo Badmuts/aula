@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: elastic
-  labels:
-    name: elastic
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: elastic
-      tier: database
-  replicas: 1
   template:
     metadata:
       labels:
         app: elastic
-        tier: database
     spec:
       containers:
       - name: elastic

@@ -5,5 +5,7 @@ metadata:
   name: user-db
 spec:
   ports:
-    - port: 27017
-  clusterIP: None
+  - port: 27017
+    targetPort: 27017
+  selector:
+    app: user-db

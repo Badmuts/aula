@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aula
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/request-modifier: 'ReplacePathRegex: ^/api/(.*) /$1'
+  namespace: default
+spec:
+  rules:
+  # - host: 192.168.99.100.xip.io
+  - http:
+      paths:
+      - path: /api/users
+        backend:
+          serviceName: user-service
+          servicePort: 3000
+      - path: /api/tokens
+        backend:
+          serviceName: auth-service
+          servicePort: 3000
+      - path: /api/courses
+        backend:
+          serviceName: course-service
+          servicePort: 3000
+      - path: /api/search
+        backend:
+          serviceName: search-service
+          servicePort: 3000
+      - path: /socket.io
+        backend:
+          serviceName: websocket-service
+          servicePort: 3000
+      - path: /
+        backend:
+          serviceName: app-web
+          servicePort: 3000

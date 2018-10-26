@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: search-service
-  labels:
-    name: search-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: search-service
-      tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
         app: search-service
-        tier: backend
     spec:
       containers:
       - name: search-service
@@ -26,7 +22,19 @@ spec:
           - name: ACCESS_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PUBLIC
           - name: NATS_HOST
             value: nats
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 3

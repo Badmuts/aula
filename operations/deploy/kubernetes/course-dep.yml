@@ -1,21 +1,17 @@
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: course-service
-  labels:
-    app: course-service
+  name: course-deploy
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: course-service
-      tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
         app: course-service
-        tier: backend
     spec:
       containers:
       - name: course-service
@@ -26,7 +22,7 @@ spec:
           - name: ACCESS_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PUBLIC
           - name: DB_HOST
             value: course-db
@@ -34,10 +30,22 @@ spec:
             value: course
           - name: DB_USER
             value: course
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: course
-                key: DB_PASSWORD
+          # - name: DB_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: course-db
+          #       key: password
           - name: NATS_HOST
             value: nats
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 3

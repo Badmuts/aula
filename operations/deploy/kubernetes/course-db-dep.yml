@@ -3,13 +3,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: course-db
-  labels:
-    name: course-db
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: course-db
-      tier: database
   replicas: 1
   template:
     metadata:

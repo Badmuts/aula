@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-web
+  name: elastic
 spec:
   ports:
-  - port: 3000
-    targetPort: 3000
+  - port: 9200
+    targetPort: 9200
   selector:
-    app: app-web
+    app: elastic
 

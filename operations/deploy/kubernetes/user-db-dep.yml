@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-db
-  labels:
-    name: user-db
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: user-db
-      tier: database
-  replicas: 1
   template:
     metadata:
       labels:
         app: user-db
-        tier: database
     spec:
       containers:
       - name: user-db

@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: websocket-service
-  labels:
-    name: websocket-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: websocket-service
-      tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
         app: websocket-service
-        tier: backend
     spec:
       containers:
       - name: websocket-service
@@ -26,7 +22,19 @@ spec:
           - name: ACCESS_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PUBLIC
           - name: NATS_HOST
             value: nats
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 3

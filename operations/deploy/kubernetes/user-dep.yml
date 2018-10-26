@@ -3,19 +3,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-service
-  labels:
-    name: user-service
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
-      tier: backend
-  replicas: 1
   template:
     metadata:
       labels:
         app: user-service
-        tier: backend
     spec:
       containers:
       - name: user-service
@@ -26,18 +22,30 @@ spec:
           - name: ACCESS_TOKEN_PUBLIC
             valueFrom:
               secretKeyRef:
-                name: auth
+                name: jwt-tokens
                 key: ACCESS_TOKEN_PUBLIC
           - name: DB_HOST
             value: user-db
           - name: DB_DATABASE
             value: user
-          - name: DB_USER
-            value: user
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: user
-                key: DB_PASSWORD
+          # - name: DB_USER
+          #   value: user
+          # - name: DB_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: user-db
+          #       key: password
           - name: NATS_HOST
             value: nats
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 300
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 3
