@@ -1,5 +1,7 @@
 {
   "name": "aula",
+  "license": "AGPL-3.0-or-later",
+  "repository": "https://github.com/Badmuts/aula",
   "private": true,
   "devDependencies": {
     "lerna": "^3.4.0"
