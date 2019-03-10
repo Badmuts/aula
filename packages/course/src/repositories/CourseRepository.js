@@ -1,14 +1,8 @@
 const Course = require('./../models/Course.js')
+const Emittery = require('emittery');
+const emitter = new Emittery();
 
-const observers = {
-    'created': [],
-    'updated': [],
-    'destroyed': []
-}
-
-const notify = (event, data) => setImmediate(() => observers[event].map(cb => cb(data)))
-
-module.exports = {
+const repo = Object.assign(emitter, {
     find() {
         return Course.find().select('-__v').exec();
     },
@@ -16,7 +10,7 @@ module.exports = {
     create(course) {
         return Course.create(course)
             .then(course => {
-                notify('created', course)
+                this.emit('created', course)
                 return course
             })
     },
@@ -25,12 +19,10 @@ module.exports = {
         return Course.update({ _id: id }, course).exec()
             .then(() => Course.findOne({ _id: id }).exec())
             .then(_course => {
-                notify('updated', _course)
+                this.emit('updated', _course)
                 return _course
             })
-    },
-
-    on(event, cb) {
-        observers[event].push(cb)
     }
-}
+})
+
+module.exports = repo
