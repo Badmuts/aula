@@ -3,17 +3,17 @@ import NavbarContainer from '../containers/NavbarContainer';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Tabbar from '../components/ui/Tabbar';
 import Header from '../components/ui/Header';
-import CourseModule from '../components/pages/course/CourseModule';
-import CourseContent from '../components/pages/course/CourseContent';
-import CourseVideo from '../components/pages/course/CourseVideo';
-import CourseAnnouncements from '../components/pages/course/CourseAnnoucements';
+import CourseModule from '../components/pages/Course/CourseModule';
+import CourseContent from '../components/pages/Course/CourseContent';
+import CourseVideo from '../components/pages/Course/CourseVideo';
+import CourseAnnouncements from '../components/pages/Course/CourseAnnoucements';
 import Loader from '../components/ui/Loader';
 import {Switch, Route, Redirect, NavLink} from 'react-router-dom'
 
 import * as CourseService from '../services/CourseService';
 import Badge from '../components/ui/Badge';
 import { map } from 'rxjs/operators';
-import CourseSettings from '../components/pages/course/CourseSettings';
+import CourseSettings from '../components/pages/Course/CourseSettings';
 
 export default class CourseDetailScreen extends React.Component {
     constructor(props) {
