@@ -6,7 +6,7 @@ normal=$(tput sgr0)
 INFO="${bold}$(tput setaf 2)INFO:   ${normal}"
 QUEST="${bold}$(tput setaf 4)QUEST:  ${normal}"
 
-CURRENT=$(git rev-parse --abbrev-ref HEAD | sed 's/\//-/g')-$(git rev-parse HEAD | cut -c1-7)
+CURRENT=$(git rev-parse --abbrev-ref HEAD | sed 's/\//-/g')-$(git rev-parse --short=7 HEAD)
 
 read -r -p "${QUEST} Version tag?:[${CURRENT}] -> " response
 [ -z "${response}" ] && response=${CURRENT}

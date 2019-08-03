@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ../../
+      dockerfile: services/web/Dockerfile
+    image: badmuts/aula-web:${TAG:-latest}
+    ports:
+      - "3000:3000"
+    volumes:
+      - '/usr/src/app/services/web/node_modules'
+      - './:/usr/src/app/services/web'
+    command: npm run dev

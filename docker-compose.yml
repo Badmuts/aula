@@ -7,14 +7,23 @@ services:
     volumes:
       - ./api-gateway.toml:/etc/traefik/traefik.toml
 
-  app-web:
+  tunnel:
+    image: wernight/ngrok
+    command: ngrok http api-gateway:80
+    ports:
+      - "4040:4040"
+
+  web:
     build:
       context: .
-      dockerfile: packages/app-web/Dockerfile
-    image: ${REPO:-badmuts}/aula-app-web:${TAG:-latest}
+      dockerfile: services/web/Dockerfile
+    image: ${REPO:-badmuts}/aula-web:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/app-web/node_modules'
-      - './packages/app-web:/usr/src/app/packages/app-web'
+      - '/usr/src/app/node_modules'
+      - './services/web:/usr/src/app'
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
 
   auth-service:
     build:
@@ -46,18 +55,15 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - DB_HOST=user-db
+      - DB_HOST=mongo
       - DB_DATABASE=user
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/user start"
     depends_on:
-      - user-db
+      - mongo
       - nats
-
-  user-db:
-    image: mongo:4.1-xenial
 
   course-service:
     build:
@@ -70,18 +76,15 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
-      - DB_HOST=course-db
+      - DB_HOST=mongo
       - DB_DATABASE=course
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
     command: npx nodemon --exec "npm --prefix packages/course start"
     depends_on:
-      - course-db
+      - mongo
       - nats
-
-  course-db:
-    image: mongo:4.1-xenial
 
   search-service:
     build:
@@ -121,3 +124,6 @@ services:
 
   nats:
     image: nats:1.3.0
+
+  mongo:
+    image: mongo:4.1-xenial

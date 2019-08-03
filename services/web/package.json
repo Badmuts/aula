@@ -1,0 +1,37 @@
+{
+  "name": "@badmuts/aula-web",
+  "version": "1.0.0",
+  "description": "React frontend application build with Next.js",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "export": "npm run build && next export",
+    "start": "next start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "debug": "^4.1.1",
+    "formik": "^1.5.8",
+    "js-cookie": "^2.2.0",
+    "ky": "^0.11.2",
+    "ky-universal": "^0.2.2",
+    "lodash": "^4.17.15",
+    "next": "^9.0.2",
+    "next-cookies": "^1.1.2",
+    "polished": "^3.4.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-gravatar": "^2.6.3",
+    "react-modal": "^3.9.1",
+    "rxjs": "^6.5.2",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.3.2",
+    "styled-reset": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.6"
+  }
+}

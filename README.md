@@ -6,9 +6,9 @@ _**Aula** — A microservice oriented webservice exploring the [CNCF](https://ww
 
 * **Microservices**: Implement a webservice using a microservice architecture
 * **Containerized**: Every service should be able to run within its own container.
-* **Cloud Native**: Try to incorporate useful tooling to make the project cloud native.
-* **Serverless**: Explore serverless architecture while still be able to manage own server deployments.
-* **Learn**: Explore latest techniques, tools within the Cloud Native industry and have fun doing so.
+* **Cloud Native**: Try to incorporate useful tooling from the CNCF project.
+* **Serverless**: Explore how serverless and a microservice architecture work together.
+* **Learn**: Explore latest techniques, tools from the Cloud Native Foundation and industry and have fun doing so.
 
 ## Getting started
 Recommend way is to use the provided docker environment:
@@ -31,7 +31,7 @@ $ npm start
 > **Note:** This method requires you to setup your own environment
 
 ## Packages
-* 🦄 [app-web](packages/app-web)
+* 🦄 ~~[app-web](packages/app-web)~~ Replaced by [web](services/web)
 * 🔑 [auth](packages/auth)
 * 🌍 [base-server](packages/base-server)
 * 📓 [course](packages/course)
@@ -39,6 +39,9 @@ $ npm start
 * 🕵️‍♂️ [search](packages/search)
 * 👨‍🎨 [user](packages/user)
 * 🔮 [websocket](packages/websocket)
+
+## Services
+* 🦄 [web](services/web) — *SSR React web app*
 
 ## Screenshots
 <img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
@@ -55,3 +58,27 @@ QUEST:   Version tag?:[master-87265e6] -> 1.0.0
 INFO:    Starting build for version 1.0.0
 ...
 ```
+
+## Todo
+**Services**
+- [ ] Move services from packages to services
+- [ ] Add Graphql endpoint
+- [ ] Authenticate websocket requests
+- [ ] Version message queue
+- [ ] Workers (eg. search indexers)
+
+**App**
+- [ ] Implement search
+- [ ] Implement course detail page
+
+**Testing**
+- [ ] Write tests and run through CI
+
+**Operations**
+- [ ] Logging
+- [ ] Tracing
+- [ ] Automate provisioning (db, servers, elastic etc.)
+
+**CI**
+- [ ] [Build](https://engineering.docker.com/2019/04/multi-arch-images/) multiarch images
+- [ ] Only build changed services

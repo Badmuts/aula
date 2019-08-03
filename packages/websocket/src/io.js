@@ -5,6 +5,7 @@ const nats = NATS.connect(natsConfig);
 
 module.exports = function(server) {
     const wss = io(server)
+
     wss.on('connection', ws => {
         console.log('NEW CONNECTION')
         ws.on('error', console.log);

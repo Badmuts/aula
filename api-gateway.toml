@@ -27,9 +27,9 @@ address = ":8080"
     [backends.websocket-service]
       [backends.websocket-service.servers.server1]
         url = "http://websocket-service:3000"
-    [backend.app-web]
-      [backends.app-web.servers.server1]
-        url = "http://app-web:3000"
+    [backend.web]
+      [backends.web.servers.server1]
+        url = "http://web:3000"
 
   [frontends]
     [frontends.user-service]
@@ -57,8 +57,8 @@ address = ":8080"
       entrypoints = ["http"]
     [frontends.websocket-service.routes.api]
       rule = "PathPrefix: /socket.io;ReplacePathRegex: (.*) $1"
-    [frontends.app-web]
-      backend = "app-web"
+    [frontends.web]
+      backend = "web"
       entrypoints = ["http"]
-    [frontends.app-web.routes.user]
+    [frontends.web.routes.user]
       rule = "HostRegexp:{catchall:.*}"
