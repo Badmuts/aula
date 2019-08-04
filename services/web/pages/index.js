@@ -7,6 +7,7 @@ import Layout from '../components/Layout'
 import {Nav, UserMenu, Menu} from '../components/Nav'
 import Brand from '../components/Brand'
 import SearchBox from '../components/SearchBox'
+import Search from '../components/Search'
 import Box from '../components/Box'
 import CardHero from '../components/CardHero'
 import CardFooter from '../components/CardFooter'
@@ -44,7 +45,8 @@ function Home({ user, ...props }) {
                     <Brand>
                         <Link href="/"><Logo src="/static/images/logo.svg" alt="Aula" /></Link>
                     </Brand>
-                    <SearchBox type="search" placeholder="Search Aula" />
+                    <Search type="search" placeholder="Search Aula" />
+                    {/* <SearchBox type="search" placeholder="Search Aula" /> */}
                     {!user && <a className="sign-in" onClick={() => setSigninModal(true)}>Sign in</a>}
                     {!user && <a className="join" onClick={() => setJoiningModal(true)}><strong>Join</strong></a>}
                     {user && <NotificationCenter
