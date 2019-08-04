@@ -23,12 +23,14 @@ import Gravatar from '../components/Gravatar'
 import * as CourseRepository from '../repositories/courses'
 import * as UserRepository from '../repositories/users'
 import { take } from 'rxjs/operators';
-import { logout, isAuthenticated, withAuthSync } from '../services/auth';
+import { logout } from '../services/auth';
+import NotificationCenter from '../components/NotificationCenter';
 
 function Home({ user, ...props }) {
     const [isJoiningModalOpen, setJoiningModal] = useState(false)
     const [isSigninModalOpen, setSigninModal] = useState(false)
     const [isMenuOpen, setMenuOpen] = useState(false)
+    const [isNotificationCenterOpen, setNotificationCenterOpen] = useState(false)
     const courses = CourseRepository.useCourses(props.courses)
     const cardHeroColors = ['green', 'pink', 'blue']
 
@@ -45,58 +47,63 @@ function Home({ user, ...props }) {
                     <SearchBox type="search" placeholder="Search Aula" />
                     {!user && <a className="sign-in" onClick={() => setSigninModal(true)}>Sign in</a>}
                     {!user && <a className="join" onClick={() => setJoiningModal(true)}><strong>Join</strong></a>}
-                    {user && <Icon><img src="/static/icons/notification.svg" alt=""/></Icon>}
+                    {user && <NotificationCenter
+                            isOpen={isNotificationCenterOpen}
+                            onClose={() => setNotificationCenterOpen(false)}
+                            onOpen={() => setNotificationCenterOpen(!isNotificationCenterOpen)}
+                        />
+                    }
                     {user && (
-                        <UserMenu isOpen={isMenuOpen}>
+                        <UserMenu isOpen={isMenuOpen} onClose={() => setMenuOpen(false)}>
                             <Gravatar email={user.email} default="https://pbs.twimg.com/profile_images/706895404386918401/o08d8BFG_400x400.jpg" onClick={() => setMenuOpen(!isMenuOpen)} />
                             <Menu>
                                 <span className="close" onClick={() => setMenuOpen(false)}>&times;</span>
                                 <Gravatar email={user.email} size={128}/>
+                                <Title>{user.name}</Title>
+                                <Spacer />
                                 <label>Account</label>
                                 <ul>
                                     <li>
-                                        <Icon>
-                                            ⚒
-                                        </Icon>
-                                        Settings
+                                        <Icon>⚒</Icon> Settings
                                     </li>
                                     <li onClick={() => logout()}>
-                                        <Icon>
-                                            👋
-                                        </Icon>
-                                        Logout
+                                        <Icon>👋</Icon> Logout
                                     </li>
                                 </ul>
                             </Menu>
                         </UserMenu>
                     )}
                 </Nav>
-                <Box>
-                    <Title>Jump back in</Title>
-                </Box>
-                <Box>
-                    {courses.slice(0, 3).map((course, index) => (
-                        <CardHero key={course._id} color={cardHeroColors[index]}>
-                            <Title>{course.name}</Title>
-                            <CardFooter>
-                                <AvatarStack>
-                                    <Avatar src="https://avatars2.githubusercontent.com/u/1849831?s=460&v=4" />
-                                </AvatarStack>
-                                <span>Daan Rosbergen</span>
-                            </CardFooter>
-                        </CardHero>
-                    ))}
-                </Box>
-                <Box>
-                    <Title>Feed</Title>
-                    {user && <pre>{JSON.stringify(user, null, 2)}</pre>}
-                    {props.error && <pre>{JSON.stringify(props.error, null, 2)}</pre>}
-                </Box>
-                <Box>
-                    <Footer>
-                        <p>Aula &copy; 2019</p>
-                    </Footer>
-                </Box>
+                {user && (
+                    <>
+                        <Box>
+                            <Title>Jump back in</Title>
+                        </Box>
+                        <Box>
+                            {courses.slice(0, 3).map((course, index) => (
+                                <CardHero key={course._id} color={cardHeroColors[index]}>
+                                    <Title>{course.name}</Title>
+                                    <CardFooter>
+                                        <AvatarStack>
+                                            <Avatar src="https://avatars2.githubusercontent.com/u/1849831?s=460&v=4" />
+                                        </AvatarStack>
+                                        <span>Daan Rosbergen</span>
+                                    </CardFooter>
+                                </CardHero>
+                            ))}
+                        </Box>
+                        <Box>
+                            <Title>Feed</Title>
+                            {user && <pre>{JSON.stringify(user, null, 2)}</pre>}
+                            {props.error && <pre>{JSON.stringify(props.error, null, 2)}</pre>}
+                        </Box>
+                        <Box>
+                            <Footer>
+                                <p>Aula &copy; 2019</p>
+                            </Footer>
+                        </Box>
+                    </>
+                )}
 
                 <Modal
                     isOpen={isJoiningModalOpen}

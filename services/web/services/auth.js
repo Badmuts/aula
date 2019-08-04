@@ -32,6 +32,8 @@ function logout () {
     Cookie.remove('refreshToken')
     // to support logging out from all windows
     window.localStorage.setItem('logout', Date.now())
+    tokenpair.accessToken = null
+    tokenpair.refreshToken = null
     Router.push('/auth/sign-in')
 }
 

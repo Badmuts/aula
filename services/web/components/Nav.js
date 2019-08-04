@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 import SearchBox from './SearchBox'
@@ -5,6 +6,8 @@ import Brand from './Brand'
 import Avatar from './Avatar';
 import Gravatar from './Gravatar';
 import Icon from './Icon';
+import Title from './Title';
+import { slideInLeft, fadeInUp } from '../styles/animations';
 
 export const Menu = styled.div`
     display: none;
@@ -17,7 +20,6 @@ export const Menu = styled.div`
     background-color: ${props => props.theme.colors.background};
     box-sizing: border-box;
     padding: 15px 20px;
-
     flex-direction: column;
 
     & ${Gravatar} {
@@ -57,8 +59,14 @@ export const Menu = styled.div`
         margin-right: 20px;
     }
 
-    .close {
+    ${Title} {
+        text-align: center;
+        margin: 0;
+        margin-bottom: 20px;
+        line-height: 1;
+    }
 
+    .close {
         width: 30px;
         height: 30px;
         background-color: rgba(0, 0, 0, 0.1);
@@ -72,21 +80,20 @@ export const Menu = styled.div`
         & {
             right: 0;
             width: 380px;
-
         }
     }
 
     @media only screen and (max-width: ${props => props.theme.breakpoints.tablet}) {
         & {
-            right: 0;
             width: 100%;
             left: 0;
             right: 0;
+            position: fixed;
         }
     }
 `
 
-export const UserMenu = styled.div`
+const StyledUserMenu = styled.div`
     cursor: pointer;
 
     ${props => props.isOpen && css`
@@ -94,11 +101,25 @@ export const UserMenu = styled.div`
             display: flex;
             visibility: visible;
             z-index: 10;
+            animation: 300ms ${slideInLeft} cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        &:after {
-            content: '';
-            background-color: rgba(0, 0, 0, 0.2);
+        @media only screen and (max-width: ${props => props.theme.breakpoints.tablet}) {
+            ${Menu} {
+                animation: 300ms ${fadeInUp} cubic-bezier(0.19, 1, 0.22, 1);
+            }
+        }
+    `}
+`
+
+const Overlay = styled.div`
+    background-color: black;
+    transition: opacity 75ms ease-in-out;
+    opacity: 0;
+
+    ${props => props.isOpen && css`
+        & {
+            opacity: 0.2;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -108,6 +129,33 @@ export const UserMenu = styled.div`
         }
     `}
 `
+
+export const UserMenu = ({ onClose, ...props }) => {
+    useEffect(() => {
+        document.addEventListener('keydown', closeOnEsc)
+        return () => document.removeEventListener('keydown', closeOnEsc);
+    })
+
+    const ESCAPE_KEY = 27
+    function closeOnEsc(e) {
+        if (e.keyCode === ESCAPE_KEY) {
+            onClose()
+        }
+    }
+
+    const overlay = useRef(null)
+
+    return (
+        <>
+            <Overlay ref={overlay} isOpen={props.isOpen} onClick={e => {
+                if (e.target === overlay.current) {
+                    onClose()
+                }
+            }} />
+            <StyledUserMenu {...props} />
+        </>
+    )
+}
 
 export const Nav = styled.nav`
     display: flex;
@@ -162,7 +210,7 @@ export const Nav = styled.nav`
             order: 5;
         }
 
-        ${UserMenu} {
+        ${StyledUserMenu} {
             order: 6;
         }
 
@@ -195,10 +243,9 @@ export const Nav = styled.nav`
 
         ${SearchBox} { order: 4; }
 
-        ${Avatar}, ${Gravatar}, ${UserMenu} { order: -2; }
+        ${Avatar}, ${Gravatar}, ${StyledUserMenu}, ${StyledUserMenu} { order: -2; }
         ${Icon} { order: 3; }
     }
 `
-
 
 export default Nav
