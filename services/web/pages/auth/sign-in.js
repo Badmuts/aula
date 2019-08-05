@@ -57,7 +57,7 @@ export default function SignIn() {
                                 <Spacer />
                                     <Field render={({ field }) => <Input {...field} type="email" placeholder="Email" />} name="email" />
                                     <Field render={({ field }) => <Input {...field} placeholder="Password" type="password" />} name="password" />
-                                    <Button primary type="submit" disabled={isSubmitting}>Sign in</Button>
+                                    <Button primary type="submit" isLoading={isSubmitting}>Sign in</Button>
                                 <Spacer />
                                 <Spacer />
                                 <Link href="/auth/forgot-password">Forgot password</Link>

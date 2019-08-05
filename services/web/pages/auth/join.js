@@ -59,7 +59,7 @@ export default function SignIn() {
                                 <Field render={({ field }) => <Input {...field} type="text" placeholder="Name" />} name="name" />
                                 <Field render={({ field }) => <Input {...field} type="email" placeholder="Email" />} name="email" />
                                 <Field render={({ field }) => <Input {...field} placeholder="Password" type="password" />} name="password" />
-                                <Button primary type="submit" disabled={isSubmitting}>Join</Button>
+                                <Button primary type="submit" isLoading={isSubmitting}>Join</Button>
                             </VerticalForm>
                         )}
                     </Formik>

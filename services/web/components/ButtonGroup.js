@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import Button from './Button'
 
 const ButtonGroup = styled.div`
     display: flex;
     flex-direction: column;
 
-    & ${Button} {
+    & button {
         border-radius: 10px;
         margin-bottom: 10px;
     }

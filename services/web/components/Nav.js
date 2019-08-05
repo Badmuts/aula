@@ -71,9 +71,9 @@ export const Menu = styled.div`
         height: 30px;
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 30px;
-        font-size: 19px;
+        font-size: 23px;
         text-align: center;
-        line-height: 29px;
+        line-height: 28px;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {

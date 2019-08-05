@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import { darken } from 'polished'
+import Loader from './Loader';
 
-const Button = styled.button`
+const Btn = styled.button`
     background-color: rgba(0,0,0,0.06) !important;
     border: none;
     color: #000;
@@ -54,6 +55,20 @@ const Button = styled.button`
             background-color: ${props => darken(0.5, props.theme.colors.green)}  !important;
         }
     `}
+
+    .loader {
+        margin: 0 auto;
+        height: 28px;
+
+        & > div {
+            background-color: rgba(0, 0, 0, .1);
+        }
+    }
 `
 
-export default Button
+export default function Button(props) {
+    return <Btn disabled={props.isLoading} {...props}>
+        {props.isLoading && <Loader />}
+        {!props.isLoading && props.children}
+    </Btn>
+}

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { fadeInUp } from '../styles/animations';
+import { lighten } from 'polished';
+import Loader from './Loader';
 
 const SearchBox = styled.input`
     width: 100%;
@@ -15,10 +17,9 @@ const SearchBox = styled.input`
     border-radius: 10px;
     border: none;
     font-size: 16px;
-    margin-top: 10px;
     -webkit-appearance: none;
-    z-index: 2;
-    position: relative;
+    flex: 1;
+    z-index: 3;
 
     &:focus {
         background-color: #fff;
@@ -43,6 +44,20 @@ const SearchResults = styled.div`
         display: none;
         visibility: hidden;
     `}
+
+    @media only screen and (max-width: ${props => props.theme.breakpoints.desktop}) {
+        & {
+            padding: 0;
+            padding-top: 10px;
+            position: relative;
+        }
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+        & {
+            position: absolute;
+        }
+    }
 `
 
 const Overlay = styled.div`
@@ -91,6 +106,12 @@ const Container = styled.div`
                 z-index: 1;
                 box-sizing: border-box;
                 margin: 5px 20px;
+                display: flex;
+                flex-direction: column;
+
+                ${SearchBox} {
+                    z-index: 2;
+                }
             `}
         }
     }
@@ -106,17 +127,66 @@ const Container = styled.div`
 `
 
 const CancelButton = styled.button`
-    float: right;
     font-size: 17px;
     padding: 0;
     -webkit-appearance: none;
-    margin: 0;
+    margin-left: 15px;
     background-color: transparent;
     border: none;
+    height: 100%;
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+        & {
+            display:none;
+        }
+    }
+`
+
+const Label = styled.span`
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: ${lighten(0.6, '#000')};
+`
+
+const SearchList = styled.ul`
+    list-style: none;
+    margin-bottom: 20px;
+`
+
+const SearchItem = styled.li`
+    padding: 15px 0;
+    border-bottom: 1px solid ${props => props.theme.colors.gray};
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:last-child {
+        border-bottom-color: transparent;
+    }
+`
+
+const Chevron = styled.span`
+    content: url('${props => `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" ><path fill="rgba(0, 0, 0, .2)" d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>`}');
+    width: 25px;
+`
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    z-index: 3;
+    margin-top: 10px;
+    width: 100%;
+    align-items: center;
 `
 
 export default function Search(props) {
     const [isOpen, setIsOpen] = useState(false)
+    const input = useRef(null)
+    const { isLoading } = props
 
     useEffect(() => {
         document.addEventListener('keydown', closeOnEsc)
@@ -127,6 +197,7 @@ export default function Search(props) {
     function closeOnEsc(e) {
         if (e.keyCode === ESCAPE_KEY) {
             setIsOpen(false)
+            input.current.blur()
         }
     }
 
@@ -135,8 +206,42 @@ export default function Search(props) {
             setIsOpen(true)
         }
     }}>
-        <SearchBox {...props} type="search" />
-        <SearchResults isOpen={isOpen} {...props} />
+        <Row>
+            <SearchBox
+                ref={input}
+                type="search"
+                onFocus={() => setIsOpen(true)}
+                {...props}
+            />
+            {isOpen && <CancelButton onClick={() => setIsOpen(false)}>Cancel</CancelButton>}
+        </Row>
+        <SearchResults isOpen={isOpen}>
+            {isLoading
+                ? <Loader />
+                : (
+                    <>
+                        <Label>Trending</Label>
+                        <SearchList>
+                            <SearchItem>
+                                Let's get queueing!
+                                <Chevron />
+                            </SearchItem>
+                            <SearchItem>
+                                Microservices 101
+                                <Chevron />
+                            </SearchItem>
+                        </SearchList>
+                        <Label>Grades</Label>
+                        <SearchList>
+                            <SearchItem>
+                                Let's get queueing!
+                                <Chevron />
+                            </SearchItem>
+                        </SearchList>
+                    </>
+                )
+            }
+        </SearchResults>
         <Overlay isOpen={isOpen} onClick={() => {
             setIsOpen(false)
         }} />
