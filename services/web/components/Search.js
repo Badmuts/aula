@@ -251,7 +251,9 @@ export default function Search(props) {
     const SLASH_KEY = 191
     function openOnSlash(e) {
         if (e.keyCode === SLASH_KEY) {
-            e.preventDefault()
+            if (!isOpen) {
+                e.preventDefault()
+            }
             setIsOpen(true)
             input.current.focus()
         }
