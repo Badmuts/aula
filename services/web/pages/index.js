@@ -100,6 +100,9 @@ function Home({ user, ...props }) {
                         <Box>
                             <Footer>
                                 <p>Aula &copy; 2019</p>
+                                <nav>
+                                    <Link href="/support"><a>Support</a></Link>
+                                </nav>
                             </Footer>
                         </Box>
                     </>

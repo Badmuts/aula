@@ -4,6 +4,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import cookies from 'next-cookies'
 import * as AuthService from '../services/auth'
+import Head from "next/head";
 
 const colors = {
     blue: "#0070f3"
@@ -104,6 +105,9 @@ export default class MyApp extends App {
         const { Component, pageProps } = this.props;
         return (
             <Container>
+                <Head>
+                    <link rel="shortcut icon" href="/static/favicon.ico" />
+                </Head>
                 <ThemeProvider theme={theme}>
                     <>
                         <GlobalStyle />
