@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { fadeInUp } from '../styles/animations';
-import { lighten } from 'polished';
+import { lighten, darken, rgba } from 'polished';
 import Loader from './Loader';
 
 const SearchBox = styled.input`
@@ -19,12 +19,21 @@ const SearchBox = styled.input`
     font-size: 16px;
     -webkit-appearance: none;
     flex: 1;
-    z-index: 3;
+
+    ${props => props.isOpen && css`
+        z-index: 3;
+    `}
 
     &:focus {
-        background-color: #fff;
         outline: none;
     }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.desktop}) {
+        &:focus {
+            background-color: #fff;
+        }
+    }
+
 `
 
 const SearchResults = styled.div`
@@ -50,6 +59,7 @@ const SearchResults = styled.div`
             padding: 0;
             padding-top: 10px;
             position: relative;
+            border-radius: 0;
         }
     }
 
@@ -108,6 +118,7 @@ const Container = styled.div`
                 margin: 5px 20px;
                 display: flex;
                 flex-direction: column;
+                overflow-y: scroll;
 
                 ${SearchBox} {
                     z-index: 2;
@@ -163,14 +174,46 @@ const SearchItem = styled.li`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     &:last-child {
         border-bottom-color: transparent;
     }
 `
 
+const GradesList = styled(SearchList)`
+    list-style: none;
+    margin-bottom: 20px;
+`
+
+const GradeItem = styled(SearchItem)`
+    flex: 1;
+
+    p {
+        width: 100%;
+        flex: 1;
+    }
+`
+
+const Grade = styled.span`
+    font-weight: 600;
+    font-size: 1.1em;
+    flex: 0;
+    margin: 0 10px;
+`
+
+const GradeIcon = styled.div`
+    content: url('${props => `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="${rgba(darken(0.55, props.theme.colors.green), 1)}" d="M15 9a3 3 0 0 0 3-3h2a5 5 0 0 1-5.1 5 5 5 0 0 1-3.9 3.9V17l5 2v1H4v-1l5-2v-2.1A5 5 0 0 1 5.1 11H5a5 5 0 0 1-5-5h2a3 3 0 0 0 3 3V4H2v2H0V2h5V0h10v2h5v4h-2V4h-3v5z"/></svg>`}');
+    width: 25px;
+    padding: 6px;
+    border-radius: 100%;
+    background-color: ${props => props.theme.colors.green};
+    box-sizing: border-box;
+    margin-right: 10px;
+`
+
 const Chevron = styled.span`
-    content: url('${props => `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" ><path fill="rgba(0, 0, 0, .2)" d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>`}');
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" ><path fill="rgba(0, 0, 0, .2)" d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"/></svg>');
     width: 25px;
 `
 
@@ -190,7 +233,11 @@ export default function Search(props) {
 
     useEffect(() => {
         document.addEventListener('keydown', closeOnEsc)
-        return () => document.removeEventListener('keydown', closeOnEsc);
+        document.addEventListener('keydown', openOnSlash)
+        return () => {
+            document.removeEventListener('keydown', closeOnEsc);
+            document.removeEventListener('keydown', openOnSlash);
+        }
     })
 
     const ESCAPE_KEY = 27
@@ -198,6 +245,15 @@ export default function Search(props) {
         if (e.keyCode === ESCAPE_KEY) {
             setIsOpen(false)
             input.current.blur()
+        }
+    }
+
+    const SLASH_KEY = 191
+    function openOnSlash(e) {
+        if (e.keyCode === SLASH_KEY) {
+            e.preventDefault()
+            setIsOpen(true)
+            input.current.focus()
         }
     }
 
@@ -211,6 +267,7 @@ export default function Search(props) {
                 ref={input}
                 type="search"
                 onFocus={() => setIsOpen(true)}
+                isOpen={isOpen}
                 {...props}
             />
             {isOpen && <CancelButton onClick={() => setIsOpen(false)}>Cancel</CancelButton>}
@@ -220,7 +277,7 @@ export default function Search(props) {
                 ? <Loader />
                 : (
                     <>
-                        <Label>Trending</Label>
+                        <Label>Courses</Label>
                         <SearchList>
                             <SearchItem>
                                 Let's get queueing!
@@ -232,12 +289,20 @@ export default function Search(props) {
                             </SearchItem>
                         </SearchList>
                         <Label>Grades</Label>
-                        <SearchList>
-                            <SearchItem>
-                                Let's get queueing!
+                        <GradesList>
+                            <GradeItem>
+                                <GradeIcon />
+                                <p>Let's get queueing!</p>
+                                <Grade>7.8</Grade>
                                 <Chevron />
-                            </SearchItem>
-                        </SearchList>
+                            </GradeItem>
+                            <GradeItem>
+                                <GradeIcon />
+                                <p>Microservices</p>
+                                <Grade>4.8</Grade>
+                                <Chevron />
+                            </GradeItem>
+                        </GradesList>
                     </>
                 )
             }
