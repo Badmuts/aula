@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { darken } from 'polished';
 
 const Footer = styled.div`
-    padding: 16px 0;
+    padding: 16px 20px;
     border-top: 1px solid ${props => props.theme.colors.darkgray};
 
     p {

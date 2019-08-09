@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import Icon from './Icon'
-import { fadeInUp } from '../styles/animations';
+import Icon from '../Icon'
+import { fadeInUp, bounceIn } from '../../styles/animations';
+import { darken } from 'polished'
 
 const Center = styled.div`
     background-color: ${props => props.theme.colors.background};
@@ -119,7 +120,29 @@ const EmptyState = styled.div`
 const List = styled.div``
 const Item = styled.div``
 
-export default function NotificationCenter({ isOpen, onClose, onOpen, ...props }) {
+const Badge = styled.span`
+    background-clip: padding-box;
+    /* GREEN */
+    /* background-image: linear-gradient(${darken(0.2, '#94F87E')},${darken(0.35, '#94F87E')}); */
+    /* BLUE */
+    background-image: linear-gradient(#54a3ff,#006eed);
+    border: 2px solid ${props => props.theme.colors.background};
+    border-radius: 50%;
+    color: #fff;
+    height: 12px;
+    width: 12px;
+    left: 12px;
+    position: absolute;
+    top: 6px;
+    animation: 750ms ${bounceIn};
+`
+
+const Container = styled.div`
+    display: flex;
+    position: relative;
+`
+
+export default function NotificationCenter({ isOpen, onClose, onOpen, hasUnread, notifications, ...props }) {
     useEffect(() => {
         document.addEventListener('keydown', closeOnEsc)
         return () => document.removeEventListener('keydown', closeOnEsc);
@@ -136,11 +159,14 @@ export default function NotificationCenter({ isOpen, onClose, onOpen, ...props }
 
     return (
         <Icon>
-            <img src="/static/icons/notification.svg" alt="Notification bell" ref={icon} onClick={(e) => {
-                if (e.target === icon.current) {
-                    onOpen()
-                }
-            }}/>
+            <Container>
+                <img src="/static/icons/notification.svg" alt="Notification bell" ref={icon} onClick={(e) => {
+                    if (e.target === icon.current) {
+                        onOpen()
+                    }
+                }}/>
+                {hasUnread && <Badge />}
+            </Container>
             <Wrapper isOpen={isOpen}>
                 <Center>
                     <Header>
@@ -148,10 +174,19 @@ export default function NotificationCenter({ isOpen, onClose, onOpen, ...props }
                         <Button onClick={onClose}>Done</Button>
                     </Header>
                     <Body>
-                        <EmptyState>
-                            <Icon><img src="/static/icons/notification.svg" alt="Notification bell"/></Icon>
-                            <p>No new notifications</p>
-                        </EmptyState>
+                        {notifications && (
+                            <List>
+                                {notifications.map(notification => (
+                                    <Item key={notification._id}>{notification.content}</Item>
+                                ))}
+                            </List>
+                        )}
+                        {!notifications && (
+                            <EmptyState>
+                                <Icon><img src="/static/icons/notification.svg" alt="Notification bell"/></Icon>
+                                <p>No new notifications</p>
+                            </EmptyState>
+                        )}
                     </Body>
                 </Center>
             </Wrapper>

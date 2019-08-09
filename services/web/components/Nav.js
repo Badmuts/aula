@@ -162,7 +162,7 @@ export const Nav = styled.nav`
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-start;
-    min-height: 68px;
+    /* min-height: 68px; */
     margin: 8px 20px;
 
     a {
@@ -240,8 +240,6 @@ export const Nav = styled.nav`
         }
 
         & { justify-content: space-evenly; }
-
-        ${SearchBox} { order: 4; }
 
         ${Avatar}, ${Gravatar}, ${StyledUserMenu}, ${StyledUserMenu} { order: -2; }
         ${Icon} { order: 3; }

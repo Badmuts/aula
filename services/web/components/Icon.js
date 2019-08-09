@@ -8,6 +8,7 @@ const Icon = styled.div`
     background-color: ${props => props.theme.colors[props.color] || props.theme.colors.green};
     padding: 22px;
     align-self: center;
+    /* position: relative; */
 
     img {
         width: 100%;

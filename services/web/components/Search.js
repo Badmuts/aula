@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 import { fadeInUp } from '../styles/animations';
 import { lighten, darken, rgba } from 'polished';
 import Loader from './Loader';
+import Link from 'next/link';
+import Highlighter from "react-highlight-words";
 
 const SearchBox = styled.input`
     width: 100%;
@@ -226,10 +228,9 @@ const Row = styled.div`
     align-items: center;
 `
 
-export default function Search(props) {
-    const [isOpen, setIsOpen] = useState(false)
+export default function Search({ isLoading, results, ...props}) {
+    const [isOpen, setIsOpen] = useState(props.isOpen)
     const input = useRef(null)
-    const { isLoading } = props
 
     useEffect(() => {
         document.addEventListener('keydown', closeOnEsc)
@@ -279,32 +280,89 @@ export default function Search(props) {
                 ? <Loader />
                 : (
                     <>
-                        <Label>Courses</Label>
-                        <SearchList>
-                            <SearchItem>
-                                Let's get queueing!
-                                <Chevron />
-                            </SearchItem>
-                            <SearchItem>
-                                Microservices 101
-                                <Chevron />
-                            </SearchItem>
-                        </SearchList>
-                        <Label>Grades</Label>
-                        <GradesList>
-                            <GradeItem>
-                                <GradeIcon />
-                                <p>Let's get queueing!</p>
-                                <Grade>7.8</Grade>
-                                <Chevron />
-                            </GradeItem>
-                            <GradeItem>
-                                <GradeIcon />
-                                <p>Microservices</p>
-                                <Grade>4.8</Grade>
-                                <Chevron />
-                            </GradeItem>
-                        </GradesList>
+                        {results && results.courses &&
+                            <>
+                                <Label>Courses</Label>
+                                <SearchList>
+                                {results.courses.slice(0, 5).map((item, i) => (
+                                    <Link href={`/courses/[id]`} as={`/courses/${item._id}`} key={i}>
+                                        <SearchItem onClick={() => setIsOpen(false)}>
+                                            <Highlighter
+                                                highlightStyle={{
+                                                    backgroundColor: 'transparent',
+                                                    fontWeight: 600
+                                                }}
+                                                searchWords={props.value.split(' ')}
+                                                textToHighlight={item.name}
+                                            />
+                                            <Chevron />
+                                        </SearchItem>
+                                    </Link>
+                                ))}
+                                </SearchList>
+                            </>
+                        }
+                        {results && results.grades &&
+                            <>
+                                <Label>Grades</Label>
+                                <GradesList>
+                                    {results.grades.map((grade, i) => (
+                                        <GradeItem key={i}>
+                                            <GradeIcon />
+                                            <p>
+                                            <Highlighter
+                                                    highlightStyle={{
+                                                        backgroundColor: 'transparent',
+                                                        fontWeight: 600
+                                                    }}
+                                                    searchWords={props.value.split(' ')}
+                                                    textToHighlight={grade.course.name}
+                                                />
+                                            </p>
+                                            <Grade>{grade.grade}</Grade>
+                                            <Chevron />
+                                        </GradeItem>
+                                    ))}
+                                </GradesList>
+                            </>
+                        }
+                        {/* TODO: Implement placeholder results */}
+                        {!results || !props.value &&
+                            <>
+                            <Label>Recently viewed courses</Label>
+                                <SearchList>
+                                    <SearchItem>
+                                        <Highlighter
+                                            highlightStyle={{
+                                                backgroundColor: 'transparent',
+                                                fontWeight: 600
+                                            }}
+                                            searchWords={props.value.split(' ')}
+                                            textToHighlight={'The Office Redux'}
+                                        />
+                                        <Chevron />
+                                    </SearchItem>
+                                </SearchList>
+                                <Label>Latest grades</Label>
+                                <GradesList>
+                                    <GradeItem>
+                                        <GradeIcon />
+                                        <p>
+                                        <Highlighter
+                                                highlightStyle={{
+                                                    backgroundColor: 'transparent',
+                                                    fontWeight: 600
+                                                }}
+                                                searchWords={props.value.split(' ')}
+                                                textToHighlight={'Microservices 101'}
+                                            />
+                                        </p>
+                                        <Grade>7.8</Grade>
+                                        <Chevron />
+                                    </GradeItem>
+                                </GradesList>
+                            </>
+                        }
                     </>
                 )
             }
