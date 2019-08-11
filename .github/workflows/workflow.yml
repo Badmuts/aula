@@ -1,18 +1,14 @@
+name: Build and deploy
 on:
   pull_request:
-    branches:
-      - master
   push:
     branches:
       - master
 
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    name: Build
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
