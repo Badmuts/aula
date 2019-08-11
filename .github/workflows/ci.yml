@@ -1,0 +1,19 @@
+name: Build and deploy
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: build and release
+      run: |
+        docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
+        make release-ci
