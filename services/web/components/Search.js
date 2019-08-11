@@ -134,7 +134,7 @@ const Container = styled.div`
             flex-grow: 1;
             width: auto;
             order: 2;
-            margin: 0 240px;
+            margin: 0 120px;
         }
     }
 `

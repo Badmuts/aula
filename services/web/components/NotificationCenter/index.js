@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import Icon from '../Icon'
 import { fadeInUp, bounceIn } from '../../styles/animations';
 import { darken } from 'polished'
+import { fetchNotifications } from '../../repositories/notifications';
+import map from 'lodash/map'
+import Gravatar from '../Gravatar'
 
 const Center = styled.div`
     background-color: ${props => props.theme.colors.background};
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.tablet}) {
         & {
-            width: 360px;
+            width: 375px;
             border-radius: 10px;
             box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.15);
             position: absolute;
@@ -117,8 +120,15 @@ const EmptyState = styled.div`
     }
 `
 
-const List = styled.div``
-const Item = styled.div``
+const List = styled.div`
+    margin: auto 20px;
+`
+const Item = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
+    align-items: center;
+`
 
 const Badge = styled.span`
     background-clip: padding-box;
@@ -142,11 +152,19 @@ const Container = styled.div`
     position: relative;
 `
 
-export default function NotificationCenter({ isOpen, onClose, onOpen, hasUnread, notifications, ...props }) {
+export default function NotificationCenter({ isOpen, onClose, onOpen, hasUnread, ...props }) {
+    const [notifications, setNotifications] = useState({})
     useEffect(() => {
         document.addEventListener('keydown', closeOnEsc)
         return () => document.removeEventListener('keydown', closeOnEsc);
     })
+
+    useEffect(() => {
+        fetchNotifications()
+            .then((items) => setNotifications(items))
+
+        return () => {}
+    }, [])
 
     const ESCAPE_KEY = 27
     function closeOnEsc(e) {
@@ -176,8 +194,12 @@ export default function NotificationCenter({ isOpen, onClose, onOpen, hasUnread,
                     <Body>
                         {notifications && (
                             <List>
-                                {notifications.map(notification => (
-                                    <Item key={notification._id}>{notification.content}</Item>
+                                {map(notifications, notification => (
+                                    <Item key={notification._id}>
+                                        <Gravatar email={notification.meta.user.email} />
+                                        <strong>{notification.title}</strong>
+                                        <p>{notification.body}</p>
+                                    </Item>
                                 ))}
                             </List>
                         )}

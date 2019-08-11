@@ -91,7 +91,7 @@ const CourseHeader = styled.div`
 `
 
 const CourseTitle = styled(Title)`
-    margin: 30px 20px;
+    margin: 20px;
     flex: 1;
 
     @media only screen and (max-width: ${props => props.theme.breakpoints.desktop}) {
