@@ -1,0 +1,23 @@
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: build and release
+      run: |
+        docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
+        make release-ci
