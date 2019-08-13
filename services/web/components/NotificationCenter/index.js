@@ -128,6 +128,30 @@ const Item = styled.div`
     justify-content: flex-start;
     padding: 10px 0;
     align-items: center;
+
+    ${Gravatar} {
+        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        align-self: flex-start;
+    }
+`
+
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: -0.004em;
+    line-height: 1.4;
+`
+
+const Line = styled.span`
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
 `
 
 const Badge = styled.span`
@@ -196,9 +220,12 @@ export default function NotificationCenter({ isOpen, onClose, onOpen, hasUnread,
                             <List>
                                 {map(notifications, notification => (
                                     <Item key={notification._id}>
-                                        <Gravatar email={notification.meta.user.email} />
-                                        <strong>{notification.title}</strong>
-                                        <p>{notification.body}</p>
+                                        <Gravatar email={notification.meta.user.email} size={64} />
+                                        <Content>
+                                            <strong>{notification.title}</strong>
+                                            <p>{notification.body}</p>
+                                            <Line />
+                                        </Content>
                                     </Item>
                                 ))}
                             </List>
