@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build and release
 on:
   pull_request:
   push:
@@ -13,7 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: build and release
+    - name: Build and release
       run: |
         docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
-        make release-ci
+        make TAG=$TAG release-ci
+      if: github.event.pull_request != ''
+      env:
+        TAG: ${{github.event.pull_request.head.ref}}-${{github.event.pull_request.head.sha}}
