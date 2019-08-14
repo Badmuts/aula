@@ -1,4 +1,4 @@
-<img src="packages/app-web/src/components/forms/login/logo.svg" width="75"/>
+<img src="services/web/static/images/logo.svg" width="75"/>
 
 _**Aula** — A microservice oriented webservice exploring the [CNCF](https://www.cncf.io/) landscape_
 
