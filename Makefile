@@ -1,6 +1,8 @@
 .PHONY: release
 # Current branch-commit (example: master-ab01c1z)
-CURRENT	= $$(git rev-parse --abbrev-ref HEAD | sed 's/\//-/g')-$$(git rev-parse HEAD | cut -c1-7)
+BRANCH  = $$(git rev-parse --abbrev-ref HEAD)
+SHA 	= $$(git rev-parse HEAD)
+CURRENT	= $$(echo $(BRANCH) | sed 's/\//-/g')-$$(echo $(SHA) | cut -c1-7)
 TAG		= $(CURRENT)
 COMPOSE_RELEASE	= docker-compose -f docker-compose.yml
 

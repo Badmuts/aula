@@ -19,4 +19,5 @@ jobs:
         make TAG=$TAG release-ci
       if: github.event.pull_request != ''
       env:
-        TAG: ${{github.event.pull_request.head.ref}}-${{github.event.pull_request.head.sha}}
+        BRANCH: ${{github.event.pull_request.head.ref}}
+        SHA: ${{github.event.pull_request.head.sha}}
