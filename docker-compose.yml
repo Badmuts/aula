@@ -28,11 +28,11 @@ services:
   auth-service:
     build:
       context: .
-      dockerfile: packages/auth/Dockerfile
+      dockerfile: services/auth/Dockerfile
     image: ${REPO:-badmuts}/aula-auth:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/auth/node_modules'
-      - './packages/auth:/usr/src/app/packages/auth'
+      - '/usr/src/app/services/auth/node_modules'
+      - './services/auth:/usr/src/app/services/auth'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -40,18 +40,18 @@ services:
       - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
       - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix packages/auth start"
+    command: npx nodemon --exec "npm --prefix services/auth start"
     depends_on:
       - nats
 
   user-service:
     build:
       context: .
-      dockerfile: packages/user/Dockerfile
+      dockerfile: services/user/Dockerfile
     image: ${REPO:-badmuts}/aula-user:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/user/node_modules'
-      - './packages/user:/usr/src/app/packages/user'
+      - '/usr/src/app/services/user/node_modules'
+      - './services/user:/usr/src/app/services/user'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -60,7 +60,7 @@ services:
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix packages/user start"
+    command: npx nodemon --exec "npm --prefix services/user start"
     depends_on:
       - mongo
       - nats
@@ -68,11 +68,11 @@ services:
   course-service:
     build:
       context: .
-      dockerfile: packages/course/Dockerfile
+      dockerfile: services/course/Dockerfile
     image: ${REPO:-badmuts}/aula-course:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/course/node_modules'
-      - './packages/course:/usr/src/app/packages/course'
+      - '/usr/src/app/services/course/node_modules'
+      - './services/course:/usr/src/app/services/course'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -81,7 +81,7 @@ services:
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix packages/course start"
+    command: npx nodemon --exec "npm --prefix services/course start"
     depends_on:
       - mongo
       - nats
@@ -89,16 +89,16 @@ services:
   search-service:
     build:
       context: .
-      dockerfile: packages/search/Dockerfile
+      dockerfile: services/search/Dockerfile
     image: ${REPO:-badmuts}/aula-search:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/search/node_modules'
-      - './packages/search:/usr/src/app/packages/search'
+      - '/usr/src/app/services/search/node_modules'
+      - './services/search:/usr/src/app/services/search'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix packages/search start"
+    command: npx nodemon --exec "npm --prefix services/search start"
     depends_on:
       - elastic
       - nats
@@ -109,16 +109,16 @@ services:
   websocket-service:
     build:
       context: .
-      dockerfile: packages/websocket/Dockerfile
+      dockerfile: services/websocket/Dockerfile
     image: ${REPO:-badmuts}/aula-websocket:${TAG:-latest}
     volumes:
-      - '/usr/src/app/packages/websocket/node_modules'
-      - './packages/websocket:/usr/src/app/packages/websocket'
+      - '/usr/src/app/services/websocket/node_modules'
+      - './services/websocket:/usr/src/app/services/websocket'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix packages/websocket start"
+    command: npx nodemon --exec "npm --prefix services/websocket start"
     depends_on:
       - nats
 
