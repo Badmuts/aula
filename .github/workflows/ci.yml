@@ -16,7 +16,7 @@ jobs:
     - name: Build and release
       run: |
         docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
-        make TAG=$TAG release-ci
+        make BRANCH=$BRANCH SHA=$SHA release-ci
       if: github.event.pull_request != ''
       env:
         BRANCH: ${{github.event.pull_request.head.ref}}
