@@ -6,3 +6,6 @@ _**Web** — The web application running on [Next.js](https://nextjs.org/)_
 ```sh
 $ npm run dev
 ```
+
+## Screenshots
+<img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
