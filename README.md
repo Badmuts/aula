@@ -35,11 +35,11 @@ $ npm start
 * 🔐 [crypto](packages/crypto)
 
 ## Services
-* 🦄 [web](services/web) — *SSR React web app*
-* 📓 [course](services/course)
 * 🔑 [auth](services/auth)
+* 📓 [course](services/course)
 * 🕵️‍♂️ [search](services/search)
 * 👨‍🎨 [user](services/user)
+* 🦄 [web](services/web) — *SSR React web app*
 * 🔮 [websocket](services/websocket)
 
 ## Screenshots
