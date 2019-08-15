@@ -59,16 +59,19 @@ INFO:    Starting build for version 1.0.0
 ```
 
 ## Todo
+**Packages**
+- [ ] Events
+
 **Services**
-- [ ] Move services from packages to services
-- [ ] Add Graphql endpoint
+- [x] Move services from packages to services
 - [ ] Authenticate websocket requests
 - [ ] Version message queue
-- [ ] Workers (eg. search indexers)
+- [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
+- [ ] Add Graphql endpoint
 
 **App**
-- [ ] Implement search
-- [ ] Implement course detail page
+- [x] Implement search
+- [x] Implement course detail page
 
 **Testing**
 - [ ] Write tests and run through CI
@@ -79,5 +82,5 @@ INFO:    Starting build for version 1.0.0
 - [ ] Automate provisioning (db, servers, elastic etc.)
 
 **CI**
-- [ ] [Build](https://engineering.docker.com/2019/04/multi-arch-images/) multiarch images
 - [ ] Only build changed services
+- [ ] [Build](https://engineering.docker.com/2019/04/multi-arch-images/) multiarch images
