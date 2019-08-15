@@ -1,0 +1,75 @@
+version: '3'
+services:
+  api-gateway:
+    image: traefik
+    ports:
+      - "3000:80"
+    volumes:
+      - ./api-gateway.toml:/etc/traefik/traefik.toml
+
+  web:
+    image: ${REPO:-badmuts}/aula-web:${TAG:-latest}
+
+  auth-service:
+    image: ${REPO:-badmuts}/aula-auth:${TAG:-latest}
+    environment:
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - ACCESS_TOKEN_PRIVATE=${ACCESS_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
+      - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
+      - NATS_HOST=nats
+    depends_on:
+      - nats
+
+  user-service:
+    image: ${REPO:-badmuts}/aula-user:${TAG:-latest}
+    environment:
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - DB_HOST=mongo
+      - DB_DATABASE=user
+      - DB_USER=
+      - DB_PASSWORD=
+      - NATS_HOST=nats
+    depends_on:
+      - mongo
+      - nats
+
+  course-service:
+    image: ${REPO:-badmuts}/aula-course:${TAG:-latest}
+    environment:
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - DB_HOST=mongo
+      - DB_DATABASE=course
+      - DB_USER=
+      - DB_PASSWORD=
+      - NATS_HOST=nats
+    depends_on:
+      - mongo
+      - nats
+
+  search-service:
+    image: ${REPO:-badmuts}/aula-search:${TAG:-latest}
+    environment:
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - NATS_HOST=nats
+    command: npx nodemon --exec "npm --prefix services/search start"
+    depends_on:
+      - elastic
+      - nats
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+
+  websocket-service:
+    image: ${REPO:-badmuts}/aula-websocket:${TAG:-latest}
+    environment:
+      - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
+      - NATS_HOST=nats
+    depends_on:
+      - nats
+
+  nats:
+    image: nats:1.3.0
+
+  mongo:
+    image: mongo:4.1-xenial
