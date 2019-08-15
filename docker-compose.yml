@@ -16,7 +16,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: web
     image: ${REPO:-badmuts}/aula-web:${TAG:-latest}
@@ -30,7 +30,7 @@ services:
   auth-service:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: auth
     image: ${REPO:-badmuts}/aula-auth:${TAG:-latest}
@@ -51,7 +51,7 @@ services:
   user-service:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: user
     image: ${REPO:-badmuts}/aula-user:${TAG:-latest}
@@ -74,7 +74,7 @@ services:
   course-service:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: course
     image: ${REPO:-badmuts}/aula-course:${TAG:-latest}
@@ -97,7 +97,7 @@ services:
   search-service:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: search
     image: ${REPO:-badmuts}/aula-search:${TAG:-latest}
@@ -119,7 +119,7 @@ services:
   websocket-service:
     build:
       context: .
-      dockerfile: services/Dockerfile
+      dockerfile: Dockerfile
       args:
         SERVICE: websocket
     image: ${REPO:-badmuts}/aula-websocket:${TAG:-latest}
