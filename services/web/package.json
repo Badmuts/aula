@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "postinstall": "npm run build",
     "export": "npm run build && next export",
     "start": "next start"
   },
