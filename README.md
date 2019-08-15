@@ -31,16 +31,17 @@ $ npm start
 > **Note:** This method requires you to setup your own environment
 
 ## Packages
-* 🌍 [base-server](packages/base-server)
-* 🔐 [crypto](packages/crypto)
+* 🌍 [base-server](packages/base-server) — *Base HTTP server with Express.js*
+* 🔐 [crypto](packages/crypto) — *Encryption utilities*
+* 🎆 [events](packages/events) — *Shared events constants emitted by services*
 
 ## Services
-* 🔑 [auth](services/auth)
-* 📓 [course](services/course)
-* 🕵️‍♂️ [search](services/search)
-* 👨‍🎨 [user](services/user)
-* 🦄 [web](services/web) — *SSR React web app*
-* 🔮 [websocket](services/websocket)
+* 🔑 [auth](services/auth) — *Authentication with JWT*
+* 📓 [course](services/course) — *Course REST API*
+* 🕵️‍♂️ [search](services/search) — *Search REST API using Elasticsearch*
+* 👨‍🎨 [user](services/user) — *User REST API*
+* 🦄 [web](services/web) — *SSR React web app with Next.js*
+* 🔮 [websocket](services/websocket) — *Websockets with socket.io*
 
 ## Screenshots
 <img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
