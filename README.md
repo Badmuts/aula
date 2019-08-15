@@ -25,7 +25,7 @@ This repo is exploring the monorepo paradigm. To facilitate this [Lerna](https:/
 ```sh
 $ npm install
 # start app
-$ npm start
+$ npx lerna start
 ```
 
 > **Note:** This method requires you to setup your own environment
@@ -61,7 +61,7 @@ INFO:    Starting build for version 1.0.0
 
 ## Todo
 **Packages**
-- [ ] Events
+- [x] Events
 
 **Services**
 - [x] Move services from packages to services
@@ -75,6 +75,7 @@ INFO:    Starting build for version 1.0.0
 - [x] Implement course detail page
 
 **Testing**
+- [ ] Smoke test after build, before release
 - [ ] Write tests and run through CI
 
 **Operations**

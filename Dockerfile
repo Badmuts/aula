@@ -11,10 +11,10 @@ ENV NODE_ENV=production \
     PORT=3000 \
     SERVICE_NAME=${SERVICE}
 
-# HEALTHCHECK --interval=30s \
-#     --timeout=2s \
-#     --retries=10 \
-#     CMD node services/${SERVICE}/healthcheck.js
+HEALTHCHECK --interval=30s \
+    --timeout=2s \
+    --retries=10 \
+    CMD node services/${SERVICE}/src/healthcheck.js
 
 EXPOSE 3000
 CMD ["npm", "--prefix", "services/${SERVICE}", "start"]
