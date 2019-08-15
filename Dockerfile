@@ -3,8 +3,8 @@ ARG SERVICE
 WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json lerna.json ./
-COPY --chown=node:node packages/ ./packages/
-COPY --chown=node:node services/${SERVICE} .
+COPY --chown=node:node packages/ ./packages
+COPY --chown=node:node services/${SERVICE} ./services/${SERVICE}
 RUN npm install --loglevel notice --unsafe-perm
 
 ENV NODE_ENV=production \
