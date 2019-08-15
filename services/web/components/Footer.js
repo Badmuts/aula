@@ -10,7 +10,6 @@ const Footer = styled.div`
     }
 
     nav {
-        display: inline-block;
         float: right;
 
         a {
