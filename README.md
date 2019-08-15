@@ -31,17 +31,16 @@ $ npm start
 > **Note:** This method requires you to setup your own environment
 
 ## Packages
-* 🦄 ~~[app-web](packages/app-web)~~ Replaced by [web](services/web)
-* 🔑 [auth](packages/auth)
 * 🌍 [base-server](packages/base-server)
-* 📓 [course](packages/course)
 * 🔐 [crypto](packages/crypto)
-* 🕵️‍♂️ [search](packages/search)
-* 👨‍🎨 [user](packages/user)
-* 🔮 [websocket](packages/websocket)
 
 ## Services
 * 🦄 [web](services/web) — *SSR React web app*
+* 📓 [course](services/course)
+* 🔑 [auth](services/auth)
+* 🕵️‍♂️ [search](services/search)
+* 👨‍🎨 [user](services/user)
+* 🔮 [websocket](services/websocket)
 
 ## Screenshots
 <img src="https://www.dropbox.com/s/plitnx02b7ek633/aula.png?raw=1">
