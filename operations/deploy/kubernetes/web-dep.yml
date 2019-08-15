@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-web
+  name: web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app-web
+      app: web
   template:
     metadata:
       labels:
-        app: app-web
+        app: web
     spec:
       containers:
-      - name: app-web
-        image: badmuts/aula-app-web:0.0.1
+      - name: web
+        image: badmuts/aula-web:0.0.1
         resources:
           limits:
             cpu: 300m
