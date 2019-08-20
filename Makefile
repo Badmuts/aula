@@ -9,6 +9,7 @@ COMPOSE_RELEASE	= docker-compose -f docker-compose.yml
 # Setup a development environment
 configure:
 	@./scripts/create-env
+	@ln -s docker-compose.dev.yml docker-compose.override.yml
 
 # Build release images
 build:
