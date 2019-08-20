@@ -1,0 +1,64 @@
+version: '3.4'
+services:
+  tunnel:
+    ports:
+      - "4040:4040"
+
+  web:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/node_modules'
+      - './services/web:/usr/src/app'
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
+
+  auth-service:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/services/auth/node_modules'
+      - './services/auth:/usr/src/app/services/auth'
+    command: npx nodemon --exec "npm --prefix services/auth start"
+
+  user-service:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/services/user/node_modules'
+      - './services/user:/usr/src/app/services/user'
+    command: npx nodemon --exec "npm --prefix services/user start"
+
+  course-service:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/services/course/node_modules'
+      - './services/course:/usr/src/app/services/course'
+    command: npx nodemon --exec "npm --prefix services/course start"
+
+  search-service:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/services/search/node_modules'
+      - './services/search:/usr/src/app/services/search'
+    command: npx nodemon --exec "npm --prefix services/search start"
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+
+  websocket-service:
+    build:
+      target: builder
+    volumes:
+      - '/usr/src/app/services/websocket/node_modules'
+      - './services/websocket:/usr/src/app/services/websocket'
+    command: npx nodemon --exec "npm --prefix services/websocket start"
+
+  nats:
+    image: nats:1.3.0
+
+  mongo:
+    image: mongo:4.1-xenial

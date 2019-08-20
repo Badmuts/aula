@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   api-gateway:
     image: traefik
@@ -10,8 +10,6 @@ services:
   tunnel:
     image: wernight/ngrok
     command: ngrok http api-gateway:80
-    ports:
-      - "4040:4040"
 
   web:
     build:
@@ -20,9 +18,6 @@ services:
       args:
         SERVICE: web
     image: ${REPO:-badmuts}/aula-web:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/node_modules'
-      - './services/web:/usr/src/app'
     environment:
       - NODE_ENV=dev
     command: npm run dev
@@ -34,9 +29,6 @@ services:
       args:
         SERVICE: auth
     image: ${REPO:-badmuts}/aula-auth:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/services/auth/node_modules'
-      - './services/auth:/usr/src/app/services/auth'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -44,7 +36,6 @@ services:
       - REFRESH_TOKEN_PRIVATE=${REFRESH_TOKEN_PRIVATE}
       - REFRESH_TOKEN_PUBLIC=${REFRESH_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix services/auth start"
     depends_on:
       - nats
 
@@ -55,9 +46,6 @@ services:
       args:
         SERVICE: user
     image: ${REPO:-badmuts}/aula-user:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/services/user/node_modules'
-      - './services/user:/usr/src/app/services/user'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -66,7 +54,6 @@ services:
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix services/user start"
     depends_on:
       - mongo
       - nats
@@ -78,9 +65,6 @@ services:
       args:
         SERVICE: course
     image: ${REPO:-badmuts}/aula-course:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/services/course/node_modules'
-      - './services/course:/usr/src/app/services/course'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
@@ -89,7 +73,6 @@ services:
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix services/course start"
     depends_on:
       - mongo
       - nats
@@ -101,14 +84,10 @@ services:
       args:
         SERVICE: search
     image: ${REPO:-badmuts}/aula-search:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/services/search/node_modules'
-      - './services/search:/usr/src/app/services/search'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix services/search start"
     depends_on:
       - elastic
       - nats
@@ -123,14 +102,10 @@ services:
       args:
         SERVICE: websocket
     image: ${REPO:-badmuts}/aula-websocket:${TAG:-latest}
-    volumes:
-      - '/usr/src/app/services/websocket/node_modules'
-      - './services/websocket:/usr/src/app/services/websocket'
     environment:
       - NODE_ENV=${NODE_ENV:-development}
       - ACCESS_TOKEN_PUBLIC=${ACCESS_TOKEN_PUBLIC}
       - NATS_HOST=nats
-    command: npx nodemon --exec "npm --prefix services/websocket start"
     depends_on:
       - nats
 
