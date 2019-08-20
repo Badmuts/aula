@@ -27,3 +27,6 @@ jobs:
         docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
         make release-ci
       if: github.event_name == 'push'
+      env:
+        BRANCH: master
+        SHA: ${{github.event.push.head}}
