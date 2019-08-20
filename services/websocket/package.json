@@ -12,7 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@badmuts/aula-base-server": "^1.0.0",
-    "socket.io": "^2.1.1",
-    "nats": "^1.0.1"
+    "@badmuts/aula-events": "^1.0.0",
+    "cookie": "^0.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "nats": "^1.0.1",
+    "socket.io": "^2.1.1"
   }
 }

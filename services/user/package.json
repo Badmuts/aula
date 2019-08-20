@@ -13,6 +13,8 @@
   "dependencies": {
     "@badmuts/aula-base-server": "^1.0.0",
     "@badmuts/aula-crypto": "^1.0.2",
+    "@badmuts/aula-events": "^1.0.0",
+    "emittery": "^0.4.1",
     "express-jwt": "^5.3.1",
     "mongoose": "^5.3.1",
     "nats": "^1.0.1"

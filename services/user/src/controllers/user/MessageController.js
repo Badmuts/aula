@@ -1,7 +1,5 @@
 const UserRepository = require('../../repositories/UserRepository')
-const NATS = require('nats')
-const natsConfig = require('../../config/nats')
-const nats = NATS.connect(natsConfig);
+const nats = require('../../utils/nats')
 
 module.exports = {
     findOne({ id }, replyTo) {

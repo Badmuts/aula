@@ -1,8 +1,14 @@
 const User = require('./../models/User')
+const Emittery = require('emittery');
+const emitter = new Emittery();
+const { USER_CREATED } = require('@badmuts/aula-events')
 
-module.exports = {
+const UserRepository = Object.assign(emitter, {
     create(user) {
         return User.create(user)
+            .then(user => {
+                this.emit(USER_CREATED, user)
+            })
     },
 
     find() {
@@ -22,4 +28,6 @@ module.exports = {
 
         return query.exec()
     }
-}
+})
+
+module.exports = UserRepository

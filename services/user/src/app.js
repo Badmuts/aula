@@ -2,8 +2,8 @@ const app = require('@badmuts/aula-base-server')
 const isAuthenticated = require('express-jwt')({
     secret: require('./config/jwt').accessToken.publicKey
 })
-const NATS = require('nats')
-const nats = NATS.connect(require('./config/nats'));
+const nats = require('./utils/nats')
+const MessageService = require('./services/MessageService')
 
 const UserHttpController = require('./controllers/user/HttpController')
 const UserMessageController = require('./controllers/user/MessageController')
@@ -47,5 +47,7 @@ app.use((err, req, res, next) => {
         stack: (process.env.NODE_ENV === 'development') ? err.stack : {},
     });
 });
+
+MessageService.start()
 
 module.exports = app

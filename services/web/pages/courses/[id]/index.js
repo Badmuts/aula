@@ -279,8 +279,9 @@ function CourseDetail({ user, course }) {
             </InfoBar>
             <CourseInfo>
                 <Title>{course.name}</Title>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe necessitatibus placeat nesciunt reprehenderit provident quis ut ex et, pariatur iure perspiciatis, temporibus dolor quibusdam consequatur minus inventore minima? Id magnam minima voluptatum consectetur repudiandae nam pariatur consequatur, aperiam, nihil eum, esse praesentium autem rerum possimus et voluptates aliquam! Natus dolorem rerum molestiae quam laudantium soluta temporibus magni, veniam consequuntur nobis voluptatum atque cum, voluptates fugit at accusamus sit reprehenderit distinctio vero.</p>
-                <p>A minus, molestias voluptatem fugiat reprehenderit magnam aliquam harum ducimus quasi voluptas distinctio quos possimus voluptates vel laborum ex impedit explicabo nihil placeat optio minima beatae velit id odio? Sunt ullam culpa minima reiciendis omnis labore ad fugit dolorum soluta unde amet similique distinctio saepe animi, laboriosam, incidunt illum porro numquam facere nisi voluptatem. Est officia illo, dolorum voluptas magni ex assumenda in, exercitationem doloremque, possimus eius excepturi necessitatibus reiciendis soluta omnis neque maiores. Id iusto quaerat error sequi!</p>
+                {course.module && course.module.outline && (
+                 <p>{course.module.outline}</p>
+                )}
             </CourseInfo>
         </Page>
     )

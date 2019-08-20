@@ -65,7 +65,7 @@ INFO:    Starting build for version 1.0.0
 
 **Services**
 - [x] Move services from packages to services
-- [ ] Authenticate websocket requests
+- [x] Authenticate websocket requests
 - [ ] Version message queue
 - [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
 - [ ] Add Graphql endpoint
