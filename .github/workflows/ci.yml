@@ -21,3 +21,9 @@ jobs:
       env:
         BRANCH: ${{github.event.pull_request.head.ref}}
         SHA: ${{github.event.pull_request.head.sha}}
+
+    - name: Build and release
+      run: |
+        docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
+        make release-ci
+      if: github.event.push != ''
