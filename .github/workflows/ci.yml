@@ -17,7 +17,7 @@ jobs:
       run: |
         docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
         make BRANCH=$BRANCH SHA=$SHA release-ci
-      if: github.event.pull_request != ''
+      if: github.event_name == 'pull_request'
       env:
         BRANCH: ${{github.event.pull_request.head.ref}}
         SHA: ${{github.event.pull_request.head.sha}}
@@ -26,4 +26,4 @@ jobs:
       run: |
         docker login -u ${{secrets.docker_user}} -p ${{secrets.docker_password}}
         make release-ci
-      if: github.event.push != ''
+      if: github.event_name == 'push'
