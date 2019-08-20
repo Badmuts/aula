@@ -32,9 +32,9 @@ $ npx lerna start
 
 ## Packages
 * 🌍 [base-server](packages/base-server) — *Base HTTP server with Express.js*
+* 🎖 [commands](packages/commands) — *Shared commands constants used by services*
 * 🔐 [crypto](packages/crypto) — *Encryption utilities*
 * 🎆 [events](packages/events) — *Shared events constants emitted by services*
-* 🎖 [commands](packages/commands) — *Shared commands constants used by services*
 
 ## Services
 * 🔑 [auth](services/auth) — *Authentication with JWT*
