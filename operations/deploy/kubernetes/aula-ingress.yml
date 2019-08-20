@@ -33,5 +33,5 @@ spec:
           servicePort: 3000
       - path: /
         backend:
-          serviceName: app-web
+          serviceName: web
           servicePort: 3000
