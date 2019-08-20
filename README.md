@@ -34,6 +34,7 @@ $ npx lerna start
 * 🌍 [base-server](packages/base-server) — *Base HTTP server with Express.js*
 * 🔐 [crypto](packages/crypto) — *Encryption utilities*
 * 🎆 [events](packages/events) — *Shared events constants emitted by services*
+* 🎖 [commands](packages/commands) — *Shared commands constants used by services*
 
 ## Services
 * 🔑 [auth](services/auth) — *Authentication with JWT*
@@ -62,12 +63,14 @@ INFO:    Starting build for version 1.0.0
 ## Todo
 **Packages**
 - [x] Events
+- [x] Commands
 
 **Services**
 - [x] Move services from packages to services
 - [x] Authenticate websocket requests
 - [ ] Version message queue
 - [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
+- [ ] Emails and notifications
 - [ ] Add Graphql endpoint
 
 **App**

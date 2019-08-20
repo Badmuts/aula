@@ -26,13 +26,17 @@ build-ci:
 	@echo "[i] tag: $(TAG)"
 	@TAG=$(TAG) $(COMPOSE_RELEASE) build
 
+# TODO: Start services and check if they are available with eg. healthcheck(.js)
+smoketest-ci:
+	@echo "starting smoketest for release..."
+
 # Push release image
 push-ci:
 	@echo "pushing release..."
 	@echo "[i] tag: $(TAG)"
 	@TAG=$(TAG) $(COMPOSE_RELEASE) push
 
-release-ci: build-ci push-ci
+release-ci: build-ci smoketest-ci push-ci
 
 # Provision dev, staging, qa and prod env
 provision:
