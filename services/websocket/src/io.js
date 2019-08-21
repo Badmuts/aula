@@ -10,8 +10,6 @@ module.exports = function(server) {
     wss.use(isAuthenticated())
 
     wss.on('connection', ws => {
-        console.log('NEW CONNECTION')
-        console.log('PAYLOAD', ws.decoded)
         ws.on('error', console.log);
 
         nats.subscribe(COURSE_CREATED, function(course) {

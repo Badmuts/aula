@@ -28,13 +28,17 @@ function Header({ user }) {
     const [isSearching, setIsSearching] = useState(false)
     const [searchResults, setSearchResults] = useState({})
 
+    let searchTimeout = null
+
     function onSearch(query) {
         setSearchQuery(query)
 
         if (query) {
             if (!isSearching) {
-                setIsSearching(true)
+                clearTimeout(searchTimeout)
+                searchTimeout = setTimeout(() => setIsSearching(true), 300)
             }
+
             http$.get(`api/search?q=*${query}*`)
                 .pipe(map(results => results.reduce((acc, item) => {
                     if (item._type === 'course') {
@@ -50,7 +54,13 @@ function Header({ user }) {
 
                     return acc
                 }, {})))
-                .subscribe(setSearchResults, (err) => setIsSearching(false), () => setIsSearching(false))
+                .subscribe(setSearchResults, (err) => {
+                    setIsSearching(false)
+                    clearTimeout(searchTimeout)
+                }, () => {
+                    setIsSearching(false)
+                    clearTimeout(searchTimeout)
+                })
         } else {
             setSearchQuery('')
             setSearchResults({})

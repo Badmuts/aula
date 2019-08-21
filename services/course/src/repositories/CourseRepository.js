@@ -7,6 +7,10 @@ const repo = Object.assign(emitter, {
         return Course.find().select('-__v').exec();
     },
 
+    findOne(id) {
+        return Course.findOne(id).select('-__v').exec()
+    },
+
     create(course) {
         return Course.create(course)
             .then(course => {

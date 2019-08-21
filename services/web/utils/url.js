@@ -7,7 +7,7 @@ export function baseUrl() {
     } else {
         switch (process.NODE_ENV) {
             default:
-                return 'http://api-gateway'
+                return 'http://edge'
         }
     }
 }
