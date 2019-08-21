@@ -1,11 +1,11 @@
 version: '3'
 services:
-  api-gateway:
+  edge:
     image: traefik
     ports:
       - "3000:80"
     volumes:
-      - ./api-gateway.toml:/etc/traefik/traefik.toml
+      - ./edge.toml:/etc/traefik/traefik.toml
 
   web:
     image: ${REPO:-badmuts}/aula-web:${TAG:-latest}

@@ -1,15 +1,15 @@
 version: '3.4'
 services:
-  api-gateway:
+  edge:
     image: traefik
     ports:
       - "3000:80"
     volumes:
-      - ./api-gateway.toml:/etc/traefik/traefik.toml
+      - ./edge.toml:/etc/traefik/traefik.toml
 
   tunnel:
     image: wernight/ngrok
-    command: ngrok http api-gateway:80
+    command: ngrok http edge:80
 
   web:
     build:
