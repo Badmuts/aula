@@ -2,6 +2,8 @@
 
 _**Aula** — A microservice oriented webservice exploring the [CNCF](https://www.cncf.io/) landscape_
 
+[![CI](https://github.com/Badmuts/aula/workflows/Build%20and%20release/badge.svg)](https://github.com/Badmuts/aula/actions)
+
 ## Goals
 
 * **Microservices**: Implement a webservice using a microservice architecture
