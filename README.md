@@ -73,9 +73,13 @@ INFO:    Starting build for version 1.0.0
 - [x] Authenticate websocket requests
 - [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
 - [ ] Caching
+- [ ] Authorization with [express-jwt-permissions](https://github.com/MichielDeMey/express-jwt-permissions)
 - [ ] Version message queue
 - [ ] Notifications
 - [ ] Emails
+- [ ] Grades
+- [ ] Feed
+- [ ] Recommendation (search)
 - [ ] ~~Graphql~~
 
 **App**
