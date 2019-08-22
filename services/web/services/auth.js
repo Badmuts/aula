@@ -57,7 +57,7 @@ function getTokenPair() {
 }
 
 function auth(ctx) {
-    const { accessToken } = nextCookie(ctx)
+    const { accessToken, refreshToken } = nextCookie(ctx)
 
     /*
      * If `ctx.req` is available it means we are on the server.
@@ -71,6 +71,10 @@ function auth(ctx) {
     // We already checked for server. This should only happen on client.
     if (!accessToken) {
       Router.push('/auth/sign-in')
+    }
+
+    if (accessToken || refreshToken) {
+        setTokenPair({ accessToken, refreshToken })
     }
 
     return accessToken

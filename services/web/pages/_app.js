@@ -192,16 +192,16 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
-    static async getInitialProps({ Component, ctx }) {
-        const { accessToken, refreshToken } = cookies(ctx)
-        AuthService.setTokenPair({ accessToken, refreshToken })
+    // static async getInitialProps({ Component, ctx }) {
+    //     const { accessToken, refreshToken } = cookies(ctx)
+    //     AuthService.setTokenPair({ accessToken, refreshToken })
 
-        let pageProps = {};
-        if (Component.getInitialProps) {
-            pageProps = await Component.getInitialProps(ctx);
-        }
-        return { pageProps };
-    }
+    //     let pageProps = {};
+    //     if (Component.getInitialProps) {
+    //         pageProps = await Component.getInitialProps(ctx);
+    //     }
+    //     return { pageProps };
+    // }
 
     render() {
         const { Component, pageProps } = this.props;

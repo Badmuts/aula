@@ -11,6 +11,10 @@ import * as UserRepository from '../repositories/users'
 import { take } from 'rxjs/operators';
 import Page from '../components/Page';
 
+import flowRight from 'lodash/flowRight'
+import { withRouter } from 'next/router';
+import { withAuthSync } from '../services/auth';
+
 function Home({ user, ...props }) {
     const courses = CourseRepository.useCourses(props.courses)
     const cardHeroColors = ['green', 'pink', 'blue']
@@ -78,4 +82,4 @@ Home.getInitialProps = async () => {
     }
 }
 
-export default Home
+export default flowRight([withRouter, withAuthSync])(Home)
