@@ -1,6 +1,7 @@
 const Course = require('./../models/Course.js')
 const Emittery = require('emittery');
 const emitter = new Emittery();
+const apicache = require("apicache");
 
 const repo = Object.assign(emitter, {
     find() {

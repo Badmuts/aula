@@ -73,6 +73,7 @@ services:
       - DB_USER=
       - DB_PASSWORD=
       - NATS_HOST=nats
+      - REDIS_HOST=cache
     depends_on:
       - mongo
       - nats
@@ -114,3 +115,6 @@ services:
 
   mongo:
     image: mongo:4.1-xenial
+
+  cache:
+    image: redis

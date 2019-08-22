@@ -1,4 +1,5 @@
 const CourseRepository = require('./../../repositories/CourseRepository')
+const apicache = require('apicache')
 
 module.exports = {
     find(req, res, next) {
@@ -12,6 +13,7 @@ module.exports = {
 
         CourseRepository.create(course)
             .then(_course => res.status(201).json(_course))
+            .then(() => apicache.clear())
             .catch(next)
     },
 
@@ -20,6 +22,7 @@ module.exports = {
 
         CourseRepository.update(req.params.id, course)
             .then(_course => res.json(_course))
+            .then(() => apicache.clear())
             .catch(next)
     }
 }
