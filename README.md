@@ -66,14 +66,17 @@ INFO:    Starting build for version 1.0.0
 **Packages**
 - [x] Events
 - [x] Commands
+- [ ] HTTP Api's client libraries with circuit breaker ([opossum](https://github.com/nodeshift/opossum))
 
 **Services**
 - [x] Move services from packages to services
 - [x] Authenticate websocket requests
-- [ ] Version message queue
 - [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
-- [ ] Emails and notifications
-- [ ] Add Graphql endpoint
+- [ ] Caching
+- [ ] Version message queue
+- [ ] Notifications
+- [ ] Emails
+- [ ] ~~Graphql~~
 
 **App**
 - [x] Implement search
@@ -87,6 +90,9 @@ INFO:    Starting build for version 1.0.0
 - [ ] Logging
 - [ ] Tracing
 - [ ] Automate provisioning (db, servers, elastic etc.)
+- [ ] Deployment
+- [ ] Istio
+- [ ] Autoscaling
 
 **CI**
 - [ ] Only build changed services
