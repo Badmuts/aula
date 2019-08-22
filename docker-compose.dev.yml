@@ -9,10 +9,11 @@ services:
       target: builder
     volumes:
       - '/usr/src/app/node_modules'
-      - './services/web:/usr/src/app'
+      - '/usr/src/app/services/web/node_modules'
+      - './services/web:/usr/src/app/services/web'
     environment:
       - NODE_ENV=dev
-    command: npm run dev
+    command: npm --prefix services/web run dev
 
   auth-service:
     build:
