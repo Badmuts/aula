@@ -75,6 +75,8 @@ INFO:    Starting build for version 1.0.0
 - [ ] Caching (maybe: [apicache](https://github.com/kwhitley/apicache))
 - [ ] Authorization with [express-jwt-permissions](https://github.com/MichielDeMey/express-jwt-permissions)
 - [ ] Version message queue
+- [ ] Course content (files)
+- [ ] Course enrollment
 - [ ] Notifications
 - [ ] Emails
 - [ ] Grades
