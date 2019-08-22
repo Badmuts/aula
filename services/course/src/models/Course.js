@@ -5,6 +5,8 @@ const moduleSchema = new Schema({
     leader: String,
     outline: String,
     endRequirements: String,
+    ects: Number,
+    duration: String,
     createdAt: {type: Date, default: Date.now },
     updatedAt: {type: Date, default: Date.now },
 })
@@ -45,8 +47,6 @@ const announcementSchema = new Schema({
 // create a schema
 const courseSchema = new Schema({
   name: String,
-  ects: Number,
-  duration: String,
   createdAt: {type: Date, default: Date.now },
   updatedAt: {type: Date, default: Date.now },
 
