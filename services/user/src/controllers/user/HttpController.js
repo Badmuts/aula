@@ -1,9 +1,11 @@
 const UserService = require('../../services/UserService.js')
+const apicache = require('apicache')
 
 module.exports = {
     create(req, res, next) {
         UserService.create(req.body)
             .then(user => res.status(201).json(user))
+            .then(() => apicache.clear())
             .catch(next)
     },
 
