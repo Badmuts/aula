@@ -18,9 +18,11 @@ const videoSchema = new Schema({
 })
 
 const contentSchema = new Schema({
-    title: String,
-    description: String,
-    contentUrl: String,
+    type: String,
+    name: String,
+    path: String,
+    url: String,
+    size: Number,
     createdAt: {type: Date, default: Date.now },
     updatedAt: {type: Date, default: Date.now },
 })
@@ -28,6 +30,14 @@ const contentSchema = new Schema({
 const settingSchema = new Schema({
     key: String,
     value: String,
+    createdAt: {type: Date, default: Date.now },
+    updatedAt: {type: Date, default: Date.now },
+})
+
+const announcementSchema = new Schema({
+    title: String,
+    message: String,
+    announcer: String,
     createdAt: {type: Date, default: Date.now },
     updatedAt: {type: Date, default: Date.now },
 })
@@ -44,6 +54,7 @@ const courseSchema = new Schema({
   videos: [videoSchema],
   content: [contentSchema],
   settings: [settingSchema],
+  announcements: [announcementSchema],
 });
 
 const Course = mongoose.model('Course', courseSchema);
