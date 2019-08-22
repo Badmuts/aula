@@ -85,7 +85,7 @@ function Header({ user }) {
                 }
                 {user && (
                     <UserMenu isOpen={isMenuOpen} onClose={() => setMenuOpen(false)}>
-                        <Gravatar email={user.email} default="https://pbs.twimg.com/profile_images/706895404386918401/o08d8BFG_400x400.jpg" onClick={() => setMenuOpen(!isMenuOpen)} />
+                        <Gravatar email={user.email} default="mp" onClick={() => setMenuOpen(!isMenuOpen)} />
                         <Menu>
                             <span className="close" onClick={() => setMenuOpen(false)}>&times;</span>
                             <Gravatar email={user.email} size={128}/>
