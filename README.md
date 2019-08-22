@@ -72,7 +72,7 @@ INFO:    Starting build for version 1.0.0
 - [x] Move services from packages to services
 - [x] Authenticate websocket requests
 - [ ] Workers (eg. search indexers) with [queue groups](https://nats-io.github.io/docs/developer/concepts/queue.html)
-- [ ] Caching
+- [ ] Caching (maybe: [apicache](https://github.com/kwhitley/apicache))
 - [ ] Authorization with [express-jwt-permissions](https://github.com/MichielDeMey/express-jwt-permissions)
 - [ ] Version message queue
 - [ ] Notifications
