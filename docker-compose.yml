@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   edge:
-    image: traefik
+    image: traefik:v1.7.20
     ports:
       - "3000:80"
     volumes:
